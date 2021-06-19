@@ -4,6 +4,7 @@ export {
     EncodeInt64,
     DecodeInt,
     ByteArrayToB64,
+    ToArrayBufferFromB64,
     DoubleByteArrayToB64Array,
     B64ToBigInt,
     B64ToByteArray,
@@ -17,7 +18,7 @@ export {
     EncodeBaseUUID
  } from './src/base'
 
- export { Sha256, Ripemd160 } from './src/hash'
+ export * from './src/hash'
  export * from './src/array'
  export * from './src/output'
  export * from './src/wallet'
