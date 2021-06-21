@@ -1,1 +1,2 @@
-require('./encode')
+require('./bytes')
+require('./crypto')

@@ -23,3 +23,4 @@ export {
  export * from './src/output'
  export * from './src/wallet'
  export * from './src/is'
+export * from './src/crypto'
