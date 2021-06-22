@@ -6,13 +6,15 @@ import pkg from './package.json'
 
 const config = {
     input: './index.ts',
-    external: [ 'create-hash','bip39', 'base-x'],
+    external: [ 'create-hash','bip39', 'base-x', 'elliptic', 'bip32'],
     output: [
         {
             globals: {
                 'create-hash': 'create-hash',
                 'bip39': 'bip39',
                 'base-x': 'base-x',
+                'elliptic': 'elliptic',
+                'bip32': 'bip32',
             },
             file: pkg.main,
             format: 'umd',
