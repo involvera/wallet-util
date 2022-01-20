@@ -18,6 +18,7 @@ export {
     EncodeBaseUUID
  } from './src/base'
 
+ export * from './src/pretty'
  export * from './src/hash'
  export * from './src/array'
  export * from './src/output'

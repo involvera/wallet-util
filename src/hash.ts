@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer'
 import createHash from 'create-hash'
 import { DecodeBaseUUID, EncodeBaseUUID } from './base'
 

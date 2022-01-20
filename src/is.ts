@@ -1,3 +1,5 @@
+import { Buffer } from 'buffer'
+
 export const IsPubKHRightFormat = (pubkh: Buffer) => {
     return pubkh.length === 20
 }
