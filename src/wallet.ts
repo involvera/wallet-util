@@ -6,6 +6,8 @@ import * as bip39 from 'bip39'
 const VERSION = 0x00
 const ADDR_CHECKSUM_LENGTH = 4
 
+export const IsValidMnemonic = (mnemonic: string): boolean => bip39.validateMnemonic(mnemonic)
+
 export const NewMnemonic = (): string => bip39.generateMnemonic()
 
 export const IsAddressValid = (addr: string): boolean => {
