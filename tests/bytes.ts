@@ -1,5 +1,6 @@
 import { expect } from 'chai';
 import 'mocha';
+import { Buffer } from 'buffer';
 
 import { EncodeInt64, EncodeInt, DecodeInt } from '../'
 
