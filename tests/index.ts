@@ -1,2 +1,2 @@
-require('./bytes')
-require('./crypto')
+// require('./bytes')
+require('./types-class')

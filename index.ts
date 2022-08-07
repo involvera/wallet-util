@@ -11,17 +11,9 @@ export {
     DecodeArrayInt,
  } from './src/bytes'
 
- export {
-    EncodeBase58,
-    DecodeBase58,
-    DecodeBaseUUID,
-    EncodeBaseUUID
- } from './src/base'
-
+ export * from './src/types'
  export * from './src/pretty'
  export * from './src/hash'
  export * from './src/array'
  export * from './src/output'
- export * from './src/wallet'
  export * from './src/is'
-export * from './src/crypto'
