@@ -1,2 +1,3 @@
-// require('./bytes')
+require('./sha')
+require('./bytes')
 require('./types-class')
