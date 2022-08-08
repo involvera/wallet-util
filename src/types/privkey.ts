@@ -1,9 +1,7 @@
 import * as bip32 from 'bip32'
 import { Buffer } from 'buffer'
 import { Signature, PubKey, InvBuffer } from '.'
-
-import { ec as EC } from 'elliptic'
-const ec = new EC('secp256k1');
+import * as ec from 'tiny-secp256k1'
 
 export default class PrivateKey {
 
@@ -32,10 +30,10 @@ export default class PrivateKey {
             value = v.bytes()
         else
             value = v
-
+            
         return new Signature({
                 public_key: this.publicKey().to().string().hex(),
-                signature: Buffer.from(ec.sign(value, this.bytes()).toDER()).toString('hex')
+                signature: Buffer.from(ec.sign(value, this.bytes())).toString('hex')
         })
     }
 

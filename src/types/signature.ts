@@ -1,8 +1,7 @@
 import { Buffer } from 'buffer'
 import { InvBuffer, PubKey } from '.'
 import base58 from '../base58'
-import { ec as EC } from 'elliptic'
-const ec = new EC('secp256k1');
+import * as ec from 'tiny-secp256k1'
 
 export interface IPlainSig {
     public_key: string
@@ -40,6 +39,7 @@ export default class Signature extends InvBuffer {
             }
         }
     }
+    
     verifyWithPubK = (v: InvBuffer | Buffer | string, pubK: PubKey) => {
         let value: Buffer
         if (typeof v === 'string')
@@ -50,8 +50,9 @@ export default class Signature extends InvBuffer {
             value = v
 
         try {
-            return ec.verify(value, this.get().bytes(), pubK.bytes())
+            return ec.verify(value, pubK.bytes(), this.get().bytes())
         } catch (e){
+            console.log(e)
             return false
         }
     }

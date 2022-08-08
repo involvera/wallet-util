@@ -9,22 +9,24 @@ import pkg from './package.json'
 
 const config = {
     input: './index.ts',
-    external: [ 'create-hash','bip39', 'base-x', 'elliptic', 'bip32'],
+    external: [ 'bip39', 'tiny-secp256k1', 'bip32'],
     output: [
         {
             globals: {
-                'create-hash': 'create-hash',
                 'bip39': 'bip39',
-                'base-x': 'base-x',
-                'elliptic': 'elliptic',
                 'bip32': 'bip32',
-                'buffer': 'buffer'
+                'tiny-secp256k1': 'tiny-secp256k1'
             },
             file: pkg.main,
             format: 'umd',
             name: 'wallet-util'
         },
     ],
+    onwarn: function (message) {
+        if (/Use of `eval` \(in .*\/src\/sha256\/.*\) is strongly discouraged/.test(message)) {
+          return;
+        }
+    },
     plugins: [
         external(),
         typescript({

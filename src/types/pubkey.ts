@@ -8,5 +8,5 @@ export default class PublicKey extends InvBuffer {
     static from58 = (str: string) => new PublicKey(Buffer.from(base58.decode(str)))
     static fromHex = (str: string) => new PublicKey(Buffer.from(str, 'hex'))
 
-    hash = () => new PubKH(Ripemd160(Sha256(this.bytes())))
+    hash = async () => new PubKH(await Ripemd160(Sha256(this.bytes())))
 }

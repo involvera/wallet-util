@@ -1,0 +1,6 @@
+require('./atob')
+require('./dankogai')
+require('./es5')
+require('./large')
+require('./umd')
+require('./yoshinoya')
