@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer'
+import { Buffer } from "../buffer"
 import { InvBuffer, PubKey } from '.'
 import base58 from '../base58'
 import * as ec from 'tiny-secp256k1'

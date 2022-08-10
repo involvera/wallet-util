@@ -1,4 +1,4 @@
-import { Buffer } from "buffer"
+import { Buffer } from "../buffer"
 import base58 from '../base58'
 import { DecodeInt } from "../bytes"
 import { InvBigInt, PubKey as PublicKey, PubKH as PublicKeyHashed } from '.'

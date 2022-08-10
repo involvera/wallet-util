@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer'
+import { Buffer } from "./buffer"
 
 export const NewIntArrayFilled = (length: number, from: number): number[] => {
     let ret: number[] = []

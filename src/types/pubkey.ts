@@ -1,5 +1,5 @@
 import { InvBuffer, PubKH } from '.'
-import { Buffer } from 'buffer'
+import { Buffer } from "../buffer"
 import { Ripemd160, Sha256 } from '../hash'
 import base58 from '../base58'
 

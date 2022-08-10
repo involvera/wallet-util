@@ -1,4 +1,4 @@
-import { Buffer } from 'buffer'
+import { Buffer } from "./buffer"
 
 const MAX_UINT_8 = BigInt(256)
 const MAX_UINT_16 = BigInt(65536)

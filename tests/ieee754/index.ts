@@ -1,8 +1,8 @@
 
 import { expect } from 'chai';
 import 'mocha';
-
-const ieee754 = require('../src/ieee754')
+import { Buffer } from '../../src/buffer'
+const ieee754 = require('../../src/ieee754')
 
 const EPSILON = 0.00001
 

@@ -5,7 +5,7 @@
  * http://visionmedia.github.com/mocha/
  */
 var assert = assert || require("assert");
-var Base64 = Base64 || require('../../src/base64').Base64;
+var Base64 = require('../../src/base64').Base64;
 var is = function (a, e, m) {
     return function () {
         assert.equal(a, e, m)

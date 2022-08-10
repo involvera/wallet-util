@@ -1,5 +1,5 @@
 import { InvBuffer, Address } from '.'
-import { Buffer } from 'buffer'
+import { Buffer } from "../buffer"
 import base58 from '../base58'
 
 const VERSION = 0x00

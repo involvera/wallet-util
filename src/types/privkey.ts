@@ -1,5 +1,5 @@
 import * as bip32 from 'bip32'
-import { Buffer } from 'buffer'
+import { Buffer } from "../buffer"
 import { Signature, PubKey, InvBuffer } from '.'
 import * as ec from 'tiny-secp256k1'
 

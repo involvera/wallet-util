@@ -1,3 +1,4 @@
+import { Buffer } from "../buffer"
 import { Sha256 } from '../hash'
 import { PubKH } from '.'
 

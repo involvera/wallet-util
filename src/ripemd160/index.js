@@ -1,7 +1,7 @@
 'use strict'
-var Buffer = require('buffer').Buffer
-var inherits = require('inherits')
-var HashBase = require('hash-base')
+var Buffer = require('../buffer').Buffer
+var inherits = require('../inherits')
+var HashBase = require('../hash-base')
 
 var ARRAY16 = new Array(16)
 
@@ -51,7 +51,7 @@ function RIPEMD160 () {
   this._e = 0xc3d2e1f0
 }
 
-inherits(RIPEMD160, HashBase)
+new inherits(RIPEMD160, HashBase)
 
 RIPEMD160.prototype._update = function () {
   var words = ARRAY16
