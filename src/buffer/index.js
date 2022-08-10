@@ -946,9 +946,9 @@ Buffer.prototype.toJSON = function toJSON () {
 
 function base64Slice (buf, start, end) {
   if (start === 0 && end === buf.length) {
-    return base64.fromUint8Array(buf)
+    return base64.fromByteArray(buf)
   } else {
-    return base64.fromUint8Array(buf.slice(start, end))
+    return base64.fromByteArray(buf.slice(start, end))
   }
 }
 
@@ -2060,7 +2060,7 @@ function utf16leToBytes (str, units) {
 }
 
 function base64ToBytes (str) {
-  return base64.toUint8Array(base64clean(str))
+  return base64.toByteArray(base64clean(str))
 }
 
 function blitBuffer (src, dst, offset, length) {
