@@ -1,6 +1,6 @@
 import {
     Mnemonic,
-} from '../src/types/index'
+} from '../src/involvera-types/index'
 
 import { expect } from 'chai'
 import { Sha256 } from '../src/hash'

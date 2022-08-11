@@ -4,8 +4,7 @@ import bs58check from '../../src/base58check/index'
 var fixtures = require('./fixtures.json')
 var Buffer = require('../../src/safe-buffer').Buffer
 
-require('./base')
-
+// require('./base')
 describe('base58check', () => {
     fixtures.valid.forEach((f: any) => {
         it('decodes ' + f.string, () => {
@@ -30,5 +29,4 @@ describe('base58check', () => {
         var actual = bs58check.encode(Buffer.from(f.payload, 'hex'))
         expect(actual).to.eq(f.string)
     })
-    
 })

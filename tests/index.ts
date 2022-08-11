@@ -7,9 +7,9 @@
 // require('./cipher-base')
 // require('./bip32')
 // require('./base58')
-require('./base58check')
+// require('./base58check')
 // require('./sha')
 
 // require('./bytes')
-// require('./types-class')
+require('./types-class')
 

@@ -7,8 +7,8 @@ var createBlakeHash = require('blake-hash')
 var bs58checkBase = require('../../src/base58check/base')
 
 function blake256x2 (buffer: Buffer) {
-  buffer = createBlakeHash('blake256').update(buffer as any).digest()
-  return createBlakeHash('blake256').update(buffer as any).digest()
+  buffer = createBlakeHash('blake256').update(buffer.toString() as any).digest()
+  return createBlakeHash('blake256').update(buffer.toString() as any).digest()
 }
 
 var bs58check = bs58checkBase(blake256x2)

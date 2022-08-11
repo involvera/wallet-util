@@ -1,8 +1,7 @@
 import { Buffer } from '../buffer'
 import { testEcc } from './testecc';
 import * as crypto from './crypto';
-
-const bs58check = require('../bs58check');
+import bs58check from '../base58check'
 const typeforce = require('../typeforce');
 
 interface Network {

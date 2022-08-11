@@ -1,7 +1,8 @@
 import * as bip39 from 'bip39'
-import * as bip32 from 'bip32'
-
+import bip32 from '../bip32'
+import { Buffer } from "../buffer"
 import { PrivKey } from '.'
+
 
 export default class Mnemonic {
     
@@ -17,12 +18,10 @@ export default class Mnemonic {
     }
 
     get = () => this._mnemonic
-    private seed = () => bip39.mnemonicToSeedSync(this.get())
+    private seed = () => new Buffer(new Uint8Array(bip39.mnemonicToSeedSync(this.get())))
     private master = () => bip32.fromSeed(this.seed())
 
-    wallet = () => new PrivKey(this.master()?.derivePath('m/0/0'))
+    wallet = () => new PrivKey(this.master()).derive('m/0/0')
 
-    deriveForContent = (nonce: number): PrivKey => {
-        return new PrivKey(this.master().derivePath('m/1/' + nonce.toString()))
-    }
+    deriveForContent = (nonce: number): PrivKey => new PrivKey(this.master()).derive('m/1/' + nonce.toString())
 }

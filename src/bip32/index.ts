@@ -1,7 +1,16 @@
+import { BIP32Factory } from './bip32' 
+
+const ecc = require('tiny-secp256k1')
+const BIP32 = BIP32Factory(ecc)
+
 export {
-    BIP32Factory as default,
-    BIP32Factory,
     BIP32Interface,
     BIP32API,
     TinySecp256k1Interface,
-  } from './bip32';
+} from './bip32';
+
+export {
+  BIP32Factory
+}
+
+export default BIP32

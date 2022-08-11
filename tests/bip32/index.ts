@@ -8,7 +8,6 @@ let fixtures = require('./data.json')
 
 const ecc = require('tiny-secp256k1')
 const BIP32 = BIP32Factory(ecc)
-
     
 let LITECOIN = {
   wif: 0xb0,

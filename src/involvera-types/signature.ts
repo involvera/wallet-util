@@ -49,10 +49,10 @@ export default class Signature extends InvBuffer {
         else
             value = v
 
+        
         try {
             return ec.verify(value, pubK.bytes(), this.get().bytes())
         } catch (e){
-            console.log(e)
             return false
         }
     }
