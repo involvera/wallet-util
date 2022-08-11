@@ -6,7 +6,6 @@ export default class Mnemonic {
     
     static IsValidMnemonic = (mnemonic: string): boolean => BIP39.validateMnemonic(mnemonic)
     static NewMnemonic = () => new Mnemonic(BIP39.generateMnemonic())
-
     private _mnemonic: string
     constructor(mnemonic: string){
         if (!Mnemonic.IsValidMnemonic(mnemonic)){

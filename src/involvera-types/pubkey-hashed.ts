@@ -5,11 +5,21 @@ const VERSION = 0x00
 
 export default class PublicKeyHashed extends InvBuffer {
 
+    static LENGTH = 20
+
     static from64 = (str: string) => new PublicKeyHashed(Buffer.from(str, 'base64'))
     static from58 = (str: string) => new PublicKeyHashed(Buffer.from(base58.decode(str)))
     static fromHex = (str: string) => new PublicKeyHashed(Buffer.from(str, 'hex'))
 
-    static isRightFormat = (pubkh: string | Buffer) => pubkh.length === 20
+    static isValid = (pubkh: string | Buffer) => pubkh.length === PublicKeyHashed.LENGTH
+
+    constructor(b: Buffer){
+        super(b)
+        if (!PublicKeyHashed.isValid(b)){
+            throw new Error("Invalid public key hashed")
+        }
+    }
+
 
     toAddress = (): Address => {
         const pubKeyHash = this.bytes()
