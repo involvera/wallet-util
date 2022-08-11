@@ -1,9 +1,9 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 require('./common');
 const assert = require('assert');
-const SlowBuffer = require('../../../src/buffer').SlowBuffer;
+const SlowBuffer = require('../../../ext_src/buffer').SlowBuffer;
 
 // Test failed or zero-sized Buffer allocations not affecting typed arrays.
 // This test exists because of a regression that occurred. Because Buffer

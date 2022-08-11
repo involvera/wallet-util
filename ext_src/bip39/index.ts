@@ -1,7 +1,5 @@
-import { Sha256 } from '../hash'
-
+import { Sha256, RandomBytes } from '../hash'
 import pbkdf2Sync from '../pbkdf2';
-import { RandomBytes } from '../bytes'
 import { _default as _DEFAULT_WORDLIST, wordlists } from './_wordlist';
 import { Buffer }  from '../buffer'
 

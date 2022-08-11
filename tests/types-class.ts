@@ -3,7 +3,7 @@ import {
 } from '../src/involvera-types/index'
 
 import { expect } from 'chai'
-import { Sha256 } from '../src/hash'
+import { Sha256 } from '../ext_src/hash'
 
 const DATA_TO_SIGN = Sha256('hello')
 const WRONG_DATA_TO_SIGN = Sha256('hello2')

@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import 'mocha';
-import { Buffer } from 'buffer';
+import { Buffer } from '../ext_src';
 
-import { EncodeInt64, EncodeInt, DecodeInt } from '../'
+import { EncodeInt64, EncodeInt, DecodeInt } from '../index'
 
 const ZERO = BigInt(0)
 

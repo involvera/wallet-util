@@ -1,6 +1,6 @@
-import { Buffer } from "../buffer"
-import { Sha256 } from '../hash'
 import { PubKH } from '.'
+import { Buffer, Hash } from "../../ext_src"
+const { Sha256 } = Hash
 
 const ADDR_CHECKSUM_LENGTH = 4
 

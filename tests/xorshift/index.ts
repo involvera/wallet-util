@@ -4,10 +4,8 @@
 import 'mocha';
 import { expect } from 'chai';
 
-var xorshift = require('../../src/xorshift')
+var xorshift = require('../../ext_src/xorshift')
 var reference = require('./fixtures.json');
-import { RandomBytes } from '../../src/bytes'
-
 
 function hexview(arr: any) {
   var a = arr[0].toString(16);
@@ -102,7 +100,3 @@ function floatview(d: any) {
 it('constructor export', () => {
     expect(xorshift.constructor).to.eq(xorshift.XorShift);
 });
-
-it('yes', () =>{
-  console.log(RandomBytes(16))
-})

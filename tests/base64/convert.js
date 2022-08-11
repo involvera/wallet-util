@@ -1,5 +1,5 @@
 const test = require('tape')
-const b64 = require('../../src/base64')
+const b64 = require('../../ext_src/base64')
 const checks = [
   'a',
   'aa',

@@ -1,5 +1,5 @@
 'use strict'
-var Buffer = require('../../../src/buffer').Buffer
+var Buffer = require('../../../ext_src/buffer').Buffer;
 const assert = require('assert')
 
 const buf = Buffer.allocUnsafe(8)

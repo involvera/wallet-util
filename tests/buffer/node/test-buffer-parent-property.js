@@ -1,5 +1,5 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 /*
  * Fix for https://github.com/nodejs/node/issues/8266

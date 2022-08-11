@@ -2,8 +2,8 @@
 import { expect } from 'chai';
 import 'mocha';
 var fixtures = require('./fixtures.json')
-import { Buffer } from '../../src/buffer'
-import pbkdf2Sync from '../../src/pbkdf2'
+import { Buffer } from '../../ext_src/buffer'
+import pbkdf2Sync from '../../ext_src/pbkdf2'
 
 fixtures.invalid.push({
     key: 'password',

@@ -20,12 +20,12 @@
 // USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 require('./common');
 const assert = require('assert');
 const util = require('util');
-const buffer = require('../../../src/buffer');
+const buffer = require('../../../ext_src/buffer');
 
 var defaultMaxBytes = buffer.INSPECT_MAX_BYTES;
 buffer.INSPECT_MAX_BYTES = 2;

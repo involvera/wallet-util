@@ -2,8 +2,8 @@
 
 import 'mocha';
 import { expect } from 'chai';
-import base58 from '../../src/base58'
-import { Buffer } from '../../src/buffer'
+import base58 from '../../ext_src/base58'
+import { Buffer } from '../../ext_src/buffer'
 const fixtures = require('./fixtures.json')
 
 

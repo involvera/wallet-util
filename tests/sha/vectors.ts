@@ -2,9 +2,9 @@ import { expect } from 'chai';
 import 'mocha';
 
 var vectors = require('hash-test-vectors')
-var Buffer = require('../../src/safe-buffer').Buffer
+var Buffer = require('../../ext_src/safe-buffer').Buffer
 
-var createHash = require('../../src/sha')
+var createHash = require('../../ext_src/sha')
 
 const makeTest = (alg: string) => {
   vectors.forEach(function (v: any, i: any) {

@@ -1,5 +1,5 @@
 const test = require('tape')
-const b64 = require('../../src/base64')
+const b64 = require('../../ext_src/base64')
 
 test('convert big data to base64', function (t) {
   const big = new Uint8Array(64 * 1024 * 1024)

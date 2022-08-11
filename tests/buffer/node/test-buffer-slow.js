@@ -1,9 +1,9 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 const common = require('./common');
 const assert = require('assert');
-const buffer = require('../../../src/buffer');
+const buffer = require('../../../ext_src/buffer');
 const SlowBuffer = buffer.SlowBuffer;
 
 const ones = [1, 1, 1, 1];

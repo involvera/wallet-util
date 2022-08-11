@@ -1,4 +1,4 @@
-const B = require('../../src/buffer').Buffer
+const B = require('../../ext_src/buffer').Buffer
 const test = require('tape')
 
 test('modifying buffer created by .slice() modifies original memory', function (t) {

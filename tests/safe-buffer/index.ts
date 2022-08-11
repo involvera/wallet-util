@@ -3,8 +3,8 @@
 
 import { expect } from 'chai';
 import 'mocha';
-var SafeBuffer = require('../../src/safe-buffer').Buffer
-import { Buffer } from '../../src/buffer'
+var SafeBuffer = require('../../ext_src/safe-buffer').Buffer
+import { Buffer } from '../../ext_src/buffer'
 
 describe('Safe Buffer', () => {
     

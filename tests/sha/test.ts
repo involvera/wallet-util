@@ -3,8 +3,8 @@ import { expect } from 'chai';
 import 'mocha';
 
 
-var Sha1 = require('../../src/sha').sha1
-var Buffer = require('../../src/safe-buffer').Buffer
+var Sha1 = require('../../ext_src/sha').sha1
+var Buffer = require('../../ext_src/safe-buffer').Buffer
 
 var inputs = [
   ['', 'ascii'],

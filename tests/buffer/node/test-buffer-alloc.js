@@ -1,10 +1,10 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 const common = require('./common');
 const assert = require('assert');
 const vm = require('vm');
 
-const SlowBuffer = require('../../../src/buffer').SlowBuffer;
+const SlowBuffer = require('../../../ext_src/buffer').SlowBuffer;
 
 
 const b = Buffer.allocUnsafe(1024);

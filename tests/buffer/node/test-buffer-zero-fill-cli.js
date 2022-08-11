@@ -1,12 +1,12 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 // Flags: --zero-fill-buffers
 
 // when using --zero-fill-buffers, every Buffer and SlowBuffer
 // instance must be zero filled upon creation
 
 require('./common');
-const SlowBuffer = require('../../../src/buffer').SlowBuffer;
+const SlowBuffer = require('../../../ext_src/buffer').SlowBuffer;
 const assert = require('assert');
 
 function isZeroFilled(buf) {

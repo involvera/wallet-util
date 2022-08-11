@@ -1,10 +1,10 @@
 import 'mocha';
 import { expect } from 'chai';
-import { Buffer } from '../../src/buffer'
-import * as bip39 from '../../src/bip39'
+import { Buffer } from '../../ext_src/buffer'
+import * as bip39 from '../../ext_src/bip39'
 
 var WORDLISTS = {
-  english: require('../../src/bip39/english.json'),
+  english: require('../../ext_src/bip39/english.json'),
 }
 
 var vectors = require('./vectors.json')

@@ -1,4 +1,4 @@
-const B = require('../../src/buffer').Buffer
+const B = require('../../ext_src/buffer').Buffer
 const isBuffer = require('is-buffer')
 const test = require('tape')
 

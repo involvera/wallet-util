@@ -1,7 +1,6 @@
-import { Buffer } from "../buffer"
-import { InvBuffer, PubKey } from '.'
-import base58 from '../base58'
 import * as ec from 'tiny-secp256k1'
+import { Buffer, base58 } from "../../ext_src"
+import { InvBuffer, PubKey } from '.'
 
 export interface IPlainSig {
     public_key: string

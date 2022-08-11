@@ -1,4 +1,5 @@
 import { Buffer } from "./buffer"
+import xorshift from './xorshift'
 import sha from './sha'
 import createHmac from './sha/hmac'
 import RIPEMD160 from './ripemd160'
@@ -21,4 +22,16 @@ export const Hmac512 = (key: Buffer, data: Buffer) => {
 
 export const Ripemd160 = (val: Buffer | string): Buffer => {
     return (new RIPEMD160() as any).update(val).digest()
+}
+
+export const RandomBytes = (n: number) => {
+    if (n < 0){
+        throw new Error("can't be negative")
+    }
+    const ret: number[] = []
+    for (let i = 0; i < n; i++){
+        const r = xorshift.random()
+        ret.push(Math.floor(r * 255))
+    }
+    return new Buffer(new Uint8Array(ret))
 }

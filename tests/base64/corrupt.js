@@ -1,5 +1,5 @@
 const test = require('tape')
-const b64 = require('../../src/base64')
+const b64 = require('../../ext_src/base64')
 
 test('padding bytes found inside base64 string', function (t) {
   // See https://github.com/beatgammit/base64-js/issues/42

@@ -3,8 +3,8 @@
 import { expect } from 'chai';
 import 'mocha';
 var vectors = require('hash-test-vectors')
-import { Buffer } from '../../src/buffer'
-var RIPEMD160 = require('../../src/ripemd160')
+import { Buffer } from '../../ext_src/buffer'
+var RIPEMD160 = require('../../ext_src/ripemd160')
 
 describe('ripemd160', () => {
     vectors.forEach(function (vector: any, i:any) {

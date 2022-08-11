@@ -1,8 +1,8 @@
 import 'mocha';
 import { expect } from 'chai';
-import bs58check from '../../src/base58check/index'
+import bs58check from '../../ext_src/base58check/index'
 var fixtures = require('./fixtures.json')
-var Buffer = require('../../src/safe-buffer').Buffer
+var Buffer = require('../../ext_src/safe-buffer').Buffer
 
 // require('./base')
 describe('base58check', () => {

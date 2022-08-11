@@ -1,9 +1,9 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 const common = require('./common');
 const assert = require('assert');
-const SlowBuffer = require('../../../src/buffer').SlowBuffer;
+const SlowBuffer = require('../../../ext_src/buffer').SlowBuffer;
 const vm = require('vm');
 
 [

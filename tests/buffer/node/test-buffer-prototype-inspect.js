@@ -1,5 +1,5 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 require('./common');
 
 // lib/buffer.js defines Buffer.prototype.inspect() to override how buffers are

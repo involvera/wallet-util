@@ -2,8 +2,8 @@
 
 'use strict'
 var test = require('tape')
-var HashBase = require('../../src/hash-base')
-var { Buffer } = require('../../src/buffer')
+var HashBase = require('../../ext_src/hash-base')
+var { Buffer } = require('../../ext_src/buffer')
 
 function beforeEach (t) {
   var _test = t.test

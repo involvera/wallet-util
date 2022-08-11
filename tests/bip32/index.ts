@@ -1,8 +1,8 @@
 import 'mocha';
 import { expect } from 'chai';
 
-import { BIP32Factory } from '../../src/bip32'
-import { Buffer}  from '../../src/buffer'
+import { BIP32Factory } from '../../ext_src/bip32'
+import { Buffer}  from '../../ext_src/buffer'
 
 let fixtures = require('./data.json')
 

@@ -1,10 +1,10 @@
-import bip32, { BIP32Interface } from '../bip32'
-import { Buffer } from "../buffer"
+import { BIP32, Buffer, BIP32Interface } from '../../ext_src'
 import { Signature, PubKey, InvBuffer } from '.'
+
 
 export default class PrivateKey {
 
-    static fromBase58 = (base58Wallet: string) => new PrivateKey(bip32.fromBase58(base58Wallet))
+    static fromBase58 = (base58Wallet: string) => new PrivateKey(BIP32.fromBase58(base58Wallet))
 
     private _key: BIP32Interface
     constructor(key: BIP32Interface){

@@ -1,5 +1,5 @@
 const test = require('tape')
-const b64 = require('../../src/base64')
+const b64 = require('../../ext_src/base64')
 
 test('decode url-safe style base64 strings', function (t) {
   const expected = [0xff, 0xff, 0xbe, 0xff, 0xef, 0xbf, 0xfb, 0xef, 0xff]

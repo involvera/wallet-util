@@ -1,11 +1,9 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
-
+var Buffer = require('../../../ext_src/buffer').Buffer;
+var SlowBuffer = require('../../../ext_src/buffer').SlowBuffer;
 var common = { skip: function () {} };
 var assert = require('assert');
 
-var Buffer = require('../../../src/buffer').Buffer;
-var SlowBuffer = require('../../../src/buffer').SlowBuffer;
 
 // counter to ensure unique value is always copied
 var cntr = 0;

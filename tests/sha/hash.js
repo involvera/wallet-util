@@ -1,7 +1,7 @@
 var tape = require('tape')
-var Hash = require('../../src/sha/hash')
+var Hash = require('../../ext_src/sha/hash')
 var hex = '0A1B2C3D4E5F6G7H'
-var Buffer = require('../../src/safe-buffer').Buffer
+var Buffer = require('../../ext_src/safe-buffer').Buffer
 
 function equal (t, a, b) {
   t.equal(a.length, b.length)

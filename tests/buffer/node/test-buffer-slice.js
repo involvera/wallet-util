@@ -23,6 +23,7 @@
 'use strict';
 
 require('./common');
+var Buffer = require('../../../ext_src/buffer').Buffer;
 const assert = require('assert');
 
 assert.strictEqual(0, Buffer.from('hello', 'utf8').slice(0, 0).length);

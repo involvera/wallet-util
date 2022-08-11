@@ -1,7 +1,6 @@
 import { InvBuffer, PubKH } from '.'
-import { Buffer } from "../buffer"
-import { Ripemd160, Sha256 } from '../hash'
-import base58 from '../base58'
+import { Buffer, Hash, base58 } from "../../ext_src"
+const { Ripemd160, Sha256 } = Hash
 
 export default class PublicKey extends InvBuffer {
     static from64 = (str: string) => new PublicKey(Buffer.from(str, 'base64'))

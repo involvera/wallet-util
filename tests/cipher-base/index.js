@@ -1,8 +1,8 @@
-var Buffer = require('../../src/safe-buffer').Buffer
-var CipherBase = require('../../src/cipher-base')
+var Buffer = require('../../ext_src/safe-buffer').Buffer
+var CipherBase = require('../../ext_src/cipher-base')
 
 var test = require('tape')
-var inherits = require('../../src/inherits')
+var inherits = require('../../ext_src/inherits')
 
 test('basic version', function (t) {
   function Cipher () {

@@ -1,10 +1,8 @@
 'use strict';
-var Buffer = require('../../../src/buffer').Buffer;
+var Buffer = require('../../../ext_src/buffer').Buffer;
 
 
 var assert = require('assert');
-
-var Buffer = require('../../../src/buffer').Buffer;
 
 var b = Buffer.from('abcdef');
 var buf_a = Buffer.from('a');
