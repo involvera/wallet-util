@@ -11,7 +11,7 @@ export {
     DecodeArrayInt,
  } from './src/bytes'
 
- export * from './src/types'
+ export * from './src/involvera-types'
  export * from './src/pretty'
  export * from './src/hash'
  export * from './src/array'
