@@ -1,4 +1,4 @@
-import * as bip39 from 'bip39'
+import * as bip39 from '../bip39'
 import bip32 from '../bip32'
 import { Buffer } from "../buffer"
 import { PrivKey } from '.'

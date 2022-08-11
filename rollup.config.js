@@ -8,11 +8,10 @@ import pkg from './package.json'
 
 const config = {
     input: './index.ts',
-    external: [ 'bip39', 'tiny-secp256k1'],
+    external: [ 'tiny-secp256k1'],
     output: [
         {
             globals: {
-                'bip39': 'bip39',
                 'tiny-secp256k1': 'ec'
             },
             file: pkg.main,

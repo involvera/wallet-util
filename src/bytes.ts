@@ -1,4 +1,5 @@
 import { Buffer } from "./buffer"
+import xorshift from './xorshift'
 
 const MAX_UINT_8 = BigInt(256)
 const MAX_UINT_16 = BigInt(65536)
@@ -149,3 +150,14 @@ const intToByteArray = (val: BigInt, valType: 'int8' | 'int16' | 'int32' | 'int6
     return Buffer.from(ret.reverse())
 }
 
+export const RandomBytes = (n: number) => {
+    if (n < 0){
+        throw new Error("can't be negative")
+    }
+    const ret: number[] = []
+    for (let i = 0; i < n; i++){
+        const r = xorshift.random()
+        ret.push(Math.floor(r * 255))
+    }
+    return new Buffer(new Uint8Array(ret))
+}

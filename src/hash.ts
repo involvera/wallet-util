@@ -11,8 +11,12 @@ export const Sha512 = (val: string | Buffer): Buffer => {
     return Buffer.from(sha('sha512').update(val).digest())
 }
 
+export const CreateHmac = (alg: string, key: Buffer, data: Buffer) => {
+    return Buffer.from((createHmac(alg, key) as any).update(data).digest())
+}
+
 export const Hmac512 = (key: Buffer, data: Buffer) => {
-    return Buffer.from((createHmac('sha512', key) as any).update(data).digest())
+    return CreateHmac('sha512', key, data)
 }
 
 export const Ripemd160 = (val: Buffer | string): Buffer => {
