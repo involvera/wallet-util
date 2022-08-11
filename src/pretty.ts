@@ -1,4 +1,4 @@
-export const formatPercent = (percent: number) => {
+export const FormatVPPercent = (percent: number) => {
     const microTreatment = (percent: number, fixed: number): number | string =>{
         const p = percent.toFixed(fixed)
         if (p[p.length-1] === '0' && fixed > 0)

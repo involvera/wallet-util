@@ -110,6 +110,8 @@ export const DecodeArrayInt = (array: Buffer[]): BigInt[] => {
     return ret
 } 
 
+
+
 export const EncodeInt = (val: BigInt) => {
     return intToByteArray(val, 'int32', false)
 }

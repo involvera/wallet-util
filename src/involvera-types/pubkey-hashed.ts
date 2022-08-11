@@ -9,6 +9,8 @@ export default class PublicKeyHashed extends InvBuffer {
     static from58 = (str: string) => new PublicKeyHashed(Buffer.from(base58.decode(str)))
     static fromHex = (str: string) => new PublicKeyHashed(Buffer.from(str, 'hex'))
 
+    static isRightFormat = (pubkh: string | Buffer) => pubkh.length === 20
+
     toAddress = (): Address => {
         const pubKeyHash = this.bytes()
         const versionedPayload = Buffer.concat([Buffer.from([VERSION]), pubKeyHash])

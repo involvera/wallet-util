@@ -1,3 +1,7 @@
+import * as Lib from './ext_src'
+import * as Inv from './src/involvera-types'
+
+
 export { 
     EncodeInt,
     EncodeArrayInt,
@@ -11,9 +15,11 @@ export {
     DecodeArrayInt,
  } from './src/bytes'
 
- export * from './src/involvera-types'
  export * from './src/pretty'
- export * from './src/hash'
  export * from './src/array'
  export * from './src/output'
- export * from './src/is'
+
+export {
+    Lib,
+    Inv
+}
