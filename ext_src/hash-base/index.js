@@ -1,5 +1,4 @@
-'use strict'
-var Transform = require('readable-stream').Stream.Transform
+var Transform = require('../readable-stream').Stream.Transform
 var inherits = require('../inherits')
 var { Buffer } = require('../buffer')
 
