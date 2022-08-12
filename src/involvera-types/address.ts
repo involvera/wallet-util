@@ -1,4 +1,4 @@
-import { PubKH } from '.'
+import { PubKH, InvBuffer } from '.'
 import { Buffer, Hash } from "../../ext_src"
 const { Sha256 } = Hash
 
@@ -12,12 +12,12 @@ export default class Address {
     }
 
     static isValid = (addr: string) => {
-        let pubKeyHash = PubKH.from58(addr.slice(1, addr.length))
-        const actualChecksum = pubKeyHash.bytes().slice(pubKeyHash.bytes().length-ADDR_CHECKSUM_LENGTH, pubKeyHash.bytes().length)
+        let pubKeyHash = InvBuffer.from58(addr.slice(1, addr.length))
+        const actualChecksum = pubKeyHash.slice(pubKeyHash.length-ADDR_CHECKSUM_LENGTH, pubKeyHash.length)
         const version = addr.charCodeAt(0) - 48 - 1
-        pubKeyHash = new PubKH(pubKeyHash.bytes().slice(0, pubKeyHash.bytes().length - ADDR_CHECKSUM_LENGTH))
+        pubKeyHash = new InvBuffer(pubKeyHash.slice(0, pubKeyHash.length - ADDR_CHECKSUM_LENGTH))
     
-        const targetChecksum = Address.getChecksum(Buffer.concat([Buffer.from([version]), pubKeyHash.bytes()]))
+        const targetChecksum = Address.getChecksum(Buffer.concat([Buffer.from([version]), pubKeyHash]))
     
         return Buffer.compare(actualChecksum, targetChecksum) == 0
     }
@@ -35,7 +35,7 @@ export default class Address {
     get = () => this._adr
     toPKH = () => {
         const address = this.get()
-        const pkh = PubKH.from58(address.slice(1, address.length))
-        return new PubKH(pkh.bytes().slice(0, pkh.bytes().length - ADDR_CHECKSUM_LENGTH))
+        const pkh = InvBuffer.from58(address.slice(1, address.length))
+        return new PubKH(pkh.slice(0, pkh.length - ADDR_CHECKSUM_LENGTH))
     }
 }

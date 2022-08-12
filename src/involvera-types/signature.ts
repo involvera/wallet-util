@@ -15,7 +15,7 @@ export default class Signature extends InvBuffer {
 
     _pubk: PubKey | null = null
     constructor(signature: Buffer | IPlainSig){
-        super(Buffer.isBuffer(signature) ? signature as Buffer : Signature.fromHex(signature.signature).bytes())
+        super(Buffer.isBuffer(signature) ? signature as Buffer : Signature.fromHex(signature.signature))
         if (!Buffer.isBuffer(signature))
             this._pubk = PubKey.fromHex(signature.public_key)
     }
@@ -28,12 +28,11 @@ export default class Signature extends InvBuffer {
 
     get = () => {
         return {
-            bytes: this.bytes,
             plain: (): IPlainSig => {
                 this.throwErrorIfNotPlain()
                 return {
                     public_key: this._pubk?.to().string().hex() as string,
-                    signature: this.get().bytes().toString('hex')
+                    signature: this.toString('hex')
                 }
             }
         }
@@ -43,14 +42,12 @@ export default class Signature extends InvBuffer {
         let value: Buffer
         if (typeof v === 'string')
             value = Buffer.from(v)
-        else if (v instanceof InvBuffer)
-            value = v.bytes()
         else
             value = v
 
         
         try {
-            return ec.verify(value, pubK.bytes(), this.get().bytes())
+            return ec.verify(value, pubK, this)
         } catch (e){
             return false
         }

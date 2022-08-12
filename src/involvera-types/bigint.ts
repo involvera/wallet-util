@@ -1,48 +1,14 @@
-import { Buffer } from '../../ext_src'
-import { InvBuffer } from '.'
+import { InvBuffer, ArrayInvBuffer } from '.'
+import { 
+    intToByteArray, TStrictIntType,
+} from './utils'
 
-const MAX_UINT_8 = BigInt(256)
-const MAX_UINT_16 = BigInt(65536)
-const MAX_UINT_32 = BigInt(4294967296)
-const MAX_UINT_64 = BigInt(18446744073709551616)
+export type TIntType = 'int8' | 'int16' | 'int32' | 'int64' | 'uint8' | 'uint16' | 'uint32' | 'uint64'
 
-const TWO = BigInt(2)
-const ONE = BigInt(1)
-const ZERO = BigInt(0)
-const MINUS = BigInt(-1)
+const isUnsigned = (t: TIntType) => t.indexOf('u') === 0
+const toStrictIntType = (t: TIntType): TStrictIntType => isUnsigned(t) ? (t.substring(1) as TStrictIntType) : t as TStrictIntType
 
-const intToByteArray = (val: BigInt, valType: 'int8' | 'int16' | 'int32' | 'int64', isUnsigned: boolean): Buffer => {
-    const M = {'int8': MAX_UINT_8, 'int16': MAX_UINT_16, 'int32': MAX_UINT_32, 'int64': MAX_UINT_64}[valType]
-    const N_BYTE = {'int8': 8, 'int16': 16, 'int32': 32, 'int64': 64}[valType]
-    const CURRENT_MIN_INT = (M / TWO) * MINUS
-    const CURRENT_MAX_INT = (M / TWO) - ONE
-
-     if (!isUnsigned && (val < CURRENT_MIN_INT || val > CURRENT_MAX_INT)){
-        throw new Error("overflow")
-    } else if (isUnsigned && (val < ZERO || val > ((CURRENT_MAX_INT * TWO) + ONE))){
-        throw new Error("unsigned overflow")
-    }
-
-    if (val < ZERO) {
-        val = ((CURRENT_MAX_INT+ONE) * TWO) + BigInt(val as any)
-    }
-
-    let binary = val.toString(2);
-    const length = N_BYTE - binary.length
-    for (var i = 0; i < length; i++){
-        binary = `0${binary}`
-    }
-
-    let ret: number[] = []
-    i = 0;
-    while (i < binary.length){
-        ret.push(parseInt(binary.substr(i, 8), 2))
-        i += 8
-    }
-    return Buffer.from(ret.reverse())
-}
-
-class InvBigInt {
+export class InvBigInt {
 
     static from64 = (base64: string, isUnsigned: boolean | void) => InvBuffer.from64(base64).to().int(isUnsigned)
     static fromHex = (hex: string, isUnsigned: boolean | void) => InvBuffer.fromHex(hex).to().int(isUnsigned)
@@ -54,39 +20,75 @@ class InvBigInt {
     }
 
     big = () => this._v
+    number = () => Number(this._v)
 
     to = () => {
-        return {
-            int8: () => new InvBuffer(intToByteArray(this._v, 'int8', false)),
-            int16: () => new InvBuffer(intToByteArray(this._v, 'int16', false)),
-            int32: () => new InvBuffer(intToByteArray(this._v, 'int32', false)),
-            int64: () => new InvBuffer(intToByteArray(this._v, 'int64', false)),
-
-            unsignedInt8: () => new InvBuffer(intToByteArray(this._v, 'int8', true)),
-            unsignedInt16: () => new InvBuffer(intToByteArray(this._v, 'int16', true)),
-            unsignedInt32: () => new InvBuffer(intToByteArray(this._v, 'int32', true)),
-            unsignedInt64: () => new InvBuffer(intToByteArray(this._v, 'int64', true)),
+        const buffer = () => {
+            return {
+                int: (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype))),
+            }
         }
+
+        const string = (valtype: TIntType) => buffer().int(valtype).to().string()
+
+        return {
+            buffer,
+            string
+        }
+
     }
 }
 
-// class ArrayInvBigInt extends Array {
+export class ArrayInvBigInt extends Array<InvBigInt> {
 
-//     static from64 = (str: string[]) => {
-        
-//         new InvBuffer(Buffer.from(str, 'base64'))
-//     }
-//     static from58 = (str: string[]) => new InvBuffer(Buffer.from(base58.decode(str)))
-//     static fromHex = (str: string[]) => new InvBuffer(Buffer.from(str, 'hex'))
+    // static fromBuffers = (list: InvBuffer)
 
-//     private _v: InvBigInt[] = []
-//     constructor(i: InvBigInt[]){
-//         super(0)
-//         this._v = i
-//     }
-    
+    static fromNumbers = (list: number[]) => {
+        const ret = new ArrayInvBigInt(0)
+        for (let n of list){
+            ret.push(new InvBigInt(BigInt(n)))
+        }
+        return ret
+    }
 
-// }
+    static from64 = (arrayBase64: string[], isUnsigned: boolean | void): ArrayInvBigInt => {
+        const ret = new ArrayInvBigInt(0)
+        for (let str of arrayBase64){
+            ret.push(InvBigInt.from64(str, isUnsigned))
+        }
+        return ret
+    }
 
+    static fromHex = (arrayHex: string[], isUnsigned: boolean | void): ArrayInvBigInt => {
+        const ret = new ArrayInvBigInt(0)
+        for (let str of arrayHex){
+            ret.push(InvBigInt.fromHex(str, isUnsigned))
+        }
+        return ret
+    }
 
-export default InvBigInt
+    isIn = (n: InvBigInt | BigInt | Number) => {
+        let formated: InvBigInt
+        if (typeof n === 'number')
+            formated = InvBigInt.fromNumber(n)
+        else if (typeof n === 'bigint')
+            formated = new InvBigInt(n)
+        else 
+            formated = n as InvBigInt
+            
+        for (let e of this){
+            if (e.big() === formated.big())
+                return true
+        }
+        return false
+    }
+
+    toArrayNumber = () => this.map((v: InvBigInt) => v.number())
+    toArrayBuffer = (valtype: TIntType) => {
+        const ret = new ArrayInvBuffer(0)
+        ret.push(...this.map((v: InvBigInt) => v.to().buffer().int(valtype)))
+        return ret
+    }
+    toArrayHex = (valtype: TIntType) => this.map((v: InvBigInt) => v.to().string(valtype).hex())
+    toArrayBase64 = (valtype: TIntType) => this.map((v: InvBigInt) => v.to().string(valtype).base64())
+}

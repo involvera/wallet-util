@@ -20,14 +20,13 @@ export default class PublicKeyHashed extends InvBuffer {
         }
     }
 
-
     toAddress = (): Address => {
-        const pubKeyHash = this.bytes()
+        const pubKeyHash = this.slice()
         const versionedPayload = Buffer.concat([Buffer.from([VERSION]), pubKeyHash])
         const chksum = Address.getChecksum(versionedPayload)
     
-        const fullPayload = new PublicKeyHashed(Buffer.concat([pubKeyHash, chksum]))
-        const address = fullPayload.to().string().base58()
+        const fullPayload = Buffer.concat([pubKeyHash, chksum])
+        const address = new InvBuffer(fullPayload).to().string().base58()
         return new Address((VERSION+1).toString() + address)
     }
 }

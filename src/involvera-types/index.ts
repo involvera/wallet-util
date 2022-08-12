@@ -1,5 +1,5 @@
-import InvBuffer from "./buffer";
-import InvBigInt from './bigint'
+import { InvBuffer, ArrayInvBuffer}  from "./buffer";
+import { InvBigInt, ArrayInvBigInt} from './bigint'
 import Mnemonic from "./mnemonic";
 import PrivKey from "./privkey";
 import PubKey from "./pubkey";
@@ -8,8 +8,11 @@ import PubKH from "./pubkey-hashed";
 import Signature from "./signature";
 import TxHash from "./tx-hash";
 
+
+
 export {
     Address,
+    ArrayInvBuffer,
     PubKey,
     TxHash,
     PrivKey,
@@ -17,5 +20,6 @@ export {
     PubKH,
     Signature, 
     InvBuffer,
-    InvBigInt
+    InvBigInt,
+    ArrayInvBigInt
 }

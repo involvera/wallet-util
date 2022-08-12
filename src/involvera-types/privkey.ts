@@ -25,8 +25,6 @@ export default class PrivateKey {
         let value: Buffer
         if (typeof v === 'string')
             value = Buffer.from(v)
-        else if (v instanceof InvBuffer)
-            value = v.bytes()
         else
             value = v
             

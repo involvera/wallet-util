@@ -17,5 +17,5 @@ export default class PublicKey extends InvBuffer {
         }
     }
 
-    hash = async () => new PubKH(await Ripemd160(Sha256(this.bytes())))
+    hash = async () => new PubKH(await Ripemd160(Sha256(this)))
 }
