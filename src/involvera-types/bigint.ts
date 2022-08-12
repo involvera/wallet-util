@@ -23,13 +23,9 @@ export class InvBigInt {
     number = () => Number(this._v)
 
     to = () => {
-        const buffer = () => {
-            return {
-                int: (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype))),
-            }
-        }
+        const buffer = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))
 
-        const string = (valtype: TIntType) => buffer().int(valtype).to().string()
+        const string = (valtype: TIntType) => buffer(valtype).to().string()
 
         return {
             buffer,
@@ -86,7 +82,7 @@ export class ArrayInvBigInt extends Array<InvBigInt> {
     toArrayNumber = () => this.map((v: InvBigInt) => v.number())
     toArrayBuffer = (valtype: TIntType) => {
         const ret = new ArrayInvBuffer(0)
-        ret.push(...this.map((v: InvBigInt) => v.to().buffer().int(valtype)))
+        ret.push(...this.map((v: InvBigInt) => v.to().buffer(valtype)))
         return ret
     }
     toArrayHex = (valtype: TIntType) => this.map((v: InvBigInt) => v.to().string(valtype).hex())

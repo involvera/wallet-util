@@ -5,7 +5,7 @@ import { decodeInt } from './utils'
 
 export class InvBuffer extends Buffer {
 
-    static fromNumber = (n: number, intType: TIntType) => new InvBigInt(BigInt(n)).to().buffer().int(intType)
+    static fromNumber = (n: number, intType: TIntType) => new InvBigInt(BigInt(n)).to().buffer(intType)
     static from64 = (str: string) => new InvBuffer(Buffer.from(str, 'base64'))
     static from58 = (str: string) => new InvBuffer(Buffer.from(base58.decode(str)))
     static fromHex = (str: string) => new InvBuffer(Buffer.from(str, 'hex'))
@@ -42,7 +42,7 @@ export class ArrayInvBuffer extends Array<InvBuffer> {
     static fromNumbers = (list: number[], intType: TIntType) => {
         const ret = new ArrayInvBuffer(0)
         for (let n of list){
-            ret.push(new InvBigInt(BigInt(n)).to().buffer().int(intType))
+            ret.push(new InvBigInt(BigInt(n)).to().buffer(intType))
         }
         return ret
     }
