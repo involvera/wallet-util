@@ -6,24 +6,6 @@ import { Inv } from '../index'
 const Buffer = Inv.InvBuffer
 const { InvBigInt } = Inv
 
-const MIN_INT_8 = BigInt(-128)
-const MIN_INT_16 = BigInt(-32_768)
-const MIN_INT_32 = BigInt(-2_147_483_648)
-const MIN_INT_64 = BigInt("-9223372036854775808")
-
-const MIN_INT_8_BYTES = Buffer.from([128, 255, 255, 255])
-const MIN_INT_16_BYTES = Buffer.from([0, 128, 255, 255])
-const MIN_INT_32_BYTES = Buffer.from([0, 0, 0 ,128])
-const MIN_INT_64_BYTES = Buffer.from([0, 0, 0, 0, 0, 0, 0, 128])
-
-const MAX_UINT_8 = BigInt(256)
-const MAX_UINT_16 = BigInt(65_536)
-const MAX_UINT_32 = BigInt(4_294_967_296)
-
-const MAX_UINT_8_BYTES = Buffer.from([0, 1, 0 ,0])
-const MAX_UINT_16_BYTES = Buffer.from([0,0, 1, 0])
-const MAX_UINT_32_BYTES = Buffer.from([0, 0, 0, 0, 1, 0, 0, 0])
-
 describe('Testing int encoding/decoding', () => {
 
     it('negative int8 1/4', () => {
@@ -865,11 +847,128 @@ describe('Testing int encoding/decoding', () => {
 
     it('max uint32', () => {
         const MAX_INT_8_BYTES = new Buffer([255, 255, 255, 255])
-        const MAX_INT_8 = BigInt(4_294_967_295)
+        const MAX_INT_8 = BigInt(4294967295)
 
         expect(new InvBigInt(MAX_INT_8).to().buffer('uint32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('uint32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
     });
+
+    it('max uint64', () => {
+        const MAX_INT_8_BYTES = new Buffer([255, 255, 255, 255, 255,255,255,255])
+        const MAX_INT_8 = BigInt("18446744073709551615")
+
+        expect(new InvBigInt(MAX_INT_8).to().buffer('uint64').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
+        expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
+        expect(MAX_INT_8_BYTES.to().int().to().string('uint64').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
+    });
+
+
+    it('Throw errors', () => {
+
+        const NEG_INT_8 = BigInt(-45)
+        const NEG_INT_16 = BigInt(-4_500)
+        const NEG_INT_32 = BigInt(-45_000_000)
+        const NEG_INT_64 = BigInt(-45_000_000_000)
+
+        const POS_INT_8 = BigInt(45)
+        const POS_INT_16 = BigInt(4_500)
+        const POS_INT_32 = BigInt(45_000_000)
+        const POS_INT_64 = BigInt(45_000_000_000)
+
+        const MAX_UINT_8 = BigInt(255)
+        const MAX_UINT_16 = BigInt(65_535)
+        const MAX_UINT_32 = BigInt(4294967295)
+        const MAX_UINT_64 = BigInt("18446744073709551615")
+
+        const MIN_INT_8 = BigInt(-128)
+        const MIN_INT_16 = BigInt(-32_768)
+        const MIN_INT_32 = BigInt(-2_147_483_648)
+        const MIN_INT_64 = BigInt("-9223372036854775808")
+
+        //Negative ints
+        expect(() => new InvBigInt(NEG_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_8).to().buffer('uint8').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(NEG_INT_16).to().buffer('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_16).to().buffer('uint16').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(NEG_INT_32).to().buffer('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_32).to().buffer('uint32').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(NEG_INT_64).to().buffer('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().buffer('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().buffer('uint64').toString()).to.throw(Error)
+
+        //Positive ints
+        expect(() => new InvBigInt(POS_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_8).to().buffer('uint8').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(POS_INT_16).to().buffer('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().buffer('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().buffer('uint16').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint64').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(POS_INT_64).to().buffer('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().buffer('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().buffer('uint64').toString()).to.not.throw(Error)
+
+        //MAX UINTS
+        expect(() => new InvBigInt(MAX_UINT_8).to().buffer('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_8).to().buffer('uint8').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('uint16').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('uint32').toString()).to.not.throw(Error)
+
+        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('int64').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('uint64').toString()).to.not.throw(Error)
+    
+
+        //MIN INTS
+        expect(() => new InvBigInt(MIN_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_8).to().buffer('uint8').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(MIN_INT_16).to().buffer('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_16).to().buffer('uint16').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(MIN_INT_32).to().buffer('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_32).to().buffer('uint32').toString()).to.throw(Error)
+
+        expect(() => new InvBigInt(MIN_INT_64).to().buffer('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_64).to().buffer('uint64').toString()).to.throw(Error)
+        
+
+    })
+    
+
+
+
+
+
+
 })
