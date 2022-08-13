@@ -19,8 +19,9 @@
     },
     "include": [
         "src/**/*",
+        "ext_src/**/*",
         "index.ts",
-        "test/**/*.ts", "ext_src/hash.ts", "ext_src/index.ts", "ext_src/pbkdf2", "ext_src/base58",
+        "test/**/*.ts", 
     ],
     "exclude": [
       "node_modules",
