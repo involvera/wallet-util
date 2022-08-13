@@ -1,5 +1,5 @@
 import { Buffer } from "./buffer"
-import xorshift from './xorshift'
+import XorShift from './xorshift'
 import sha from './sha'
 import createHmac from './sha/hmac'
 import RIPEMD160 from './ripemd160'
@@ -30,7 +30,7 @@ export const RandomBytes = (n: number) => {
     }
     const ret: number[] = []
     for (let i = 0; i < n; i++){
-        const r = xorshift.random()
+        const r = (XorShift as any).random()
         ret.push(Math.floor(r * 255))
     }
     return new Buffer(new Uint8Array(ret))

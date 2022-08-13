@@ -1,17 +1,19 @@
 import typescript from 'rollup-plugin-typescript2'
 import { uglify } from 'rollup-plugin-uglify';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
 import pkg from './package.json'
+
+import path from 'path';
+const externalId = path.resolve( __dirname, 'ext_src/buffer/def.js' );
 
 const config = {
     input: './index.ts',
-    external: [ 'tiny-secp256k1'],
+    external: [ 'tiny-secp256k1' ],
     output: [
         {
             globals: {
-                'tiny-secp256k1': 'ec'
+                'tiny-secp256k1': 'ec',
+                [externalId]: 'Buffer',
             },
             file: pkg.main,
             format: 'umd',
@@ -23,10 +25,6 @@ const config = {
             tsconfig: 'tsconfig.json',
             tsconfigOverride: { compilerOptions: { module: 'ES2015' } },
         }),
-        nodeResolve({
-            preferBuiltins: false
-        }),
-        nodePolyfills(),
         commonjs(),
     ]
 }

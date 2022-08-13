@@ -16,8 +16,6 @@ const customInspectSymbol =
     ? Symbol['for']('nodejs.util.inspect.custom') // eslint-disable-line dot-notation
     : null
 
-exports.Buffer = Buffer
-exports.SlowBuffer = SlowBuffer
 exports.INSPECT_MAX_BYTES = 50
 
 const K_MAX_LENGTH = 0x7fffffff
@@ -2106,4 +2104,9 @@ function defineBigIntMethod (fn) {
 
 function BufferBigIntNotDefined () {
   throw new Error('BigInt not supported')
+}
+
+export {
+  Buffer,
+  SlowBuffer
 }

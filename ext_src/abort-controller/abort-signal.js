@@ -1,4 +1,3 @@
-
 import {
     // Event,
     EventTarget,
@@ -6,26 +5,15 @@ import {
     defineEventAttribute,
 } from "../event-target-shim"
 
-// Known Limitation
-//   Use `any` because the type of `AbortSignal` in `lib.dom.d.ts` is wrong and
-//   to make assignable our `AbortSignal` into that.
-//   https://github.com/Microsoft/TSJS-lib-generator/pull/623
-type Events = {
-    abort: any // Event & Type<"abort">
-}
-type EventAttributes = {
-    onabort: any // Event & Type<"abort">
-}
-
 /**
  * The signal class.
  * @see https://dom.spec.whatwg.org/#abortsignal
  */
-export default class AbortSignal extends EventTarget<any> {
+class AbortSignal extends EventTarget {
     /**
      * AbortSignal cannot be constructed directly.
      */
-    public constructor() {
+    constructor() {
         super()
         throw new TypeError("AbortSignal cannot be constructed directly")
     }
@@ -33,7 +21,7 @@ export default class AbortSignal extends EventTarget<any> {
     /**
      * Returns `true` if this `AbortSignal`'s `AbortController` has signaled to abort, and `false` otherwise.
      */
-    public get aborted(): boolean {
+    get aborted() {
         const aborted = abortedFlags.get(this)
         if (typeof aborted !== "boolean") {
             throw new TypeError(
@@ -50,7 +38,7 @@ defineEventAttribute(AbortSignal.prototype, "abort")
 /**
  * Create an AbortSignal object.
  */
-export function createAbortSignal(): AbortSignal {
+export function createAbortSignal() {
     const signal = Object.create(AbortSignal.prototype)
     EventTarget.call(signal)
     abortedFlags.set(signal, false)
@@ -60,19 +48,19 @@ export function createAbortSignal(): AbortSignal {
 /**
  * Abort a given signal.
  */
-export function abortSignal(signal: AbortSignal): void {
+export function abortSignal(signal) {
     if (abortedFlags.get(signal) !== false) {
         return
     }
 
     abortedFlags.set(signal, true)
-    signal.dispatchEvent<"abort">({type: "abort"} as never)
+    signal.dispatchEvent<"abort">({ type: "abort" })
 }
 
 /**
  * Aborted flag for each instances.
  */
-const abortedFlags = new WeakMap<AbortSignal, boolean>()
+const abortedFlags = new WeakMap()
 
 // Properties should be enumerable.
 Object.defineProperties(AbortSignal.prototype, {
@@ -86,3 +74,5 @@ if (typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol") {
         value: "AbortSignal",
     })
 }
+
+exports.AbortSignal = AbortSignal

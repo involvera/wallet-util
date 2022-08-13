@@ -2,7 +2,7 @@
 
 const { ArrayIsArray, ObjectSetPrototypeOf } = require('../../ours/primordials')
 
-const { EventEmitter: EE } = require('events')
+const { EventEmitter: EE } = require('../../../events')
 
 function Stream(opts) {
   EE.call(this, opts)

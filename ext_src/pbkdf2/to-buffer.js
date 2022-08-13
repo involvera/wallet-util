@@ -1,6 +1,6 @@
 var { Buffer } = require('../buffer')
 
-module.exports = function (thing, encoding, name) {
+export default function (thing, encoding, name) {
   if (Buffer.isBuffer(thing)) {
     return thing
   } else if (typeof thing === 'string') {

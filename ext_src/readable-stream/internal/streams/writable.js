@@ -39,7 +39,7 @@ const { Buffer } = require('../../../buffer')
 module.exports = Writable
 Writable.WritableState = WritableState
 
-const { EventEmitter: EE } = require('events')
+const { EventEmitter: EE } = require('../../../events')
 
 const Stream = require('./legacy').Stream
 

@@ -1,24 +1,30 @@
-import AbortSignal, { abortSignal, createAbortSignal } from "./abort-signal"
 
-export default class AbortController {
+
+const { AbortSignal, abortSignal, createAbortSignal } = require('./abort-signal')
+
+/**
+ * The AbortController.
+ * @see https://dom.spec.whatwg.org/#abortcontroller
+ */
+class AbortController {
     /**
      * Initialize this controller.
      */
-    public constructor() {
+    constructor() {
         signals.set(this, createAbortSignal())
     }
 
     /**
      * Returns the `AbortSignal` object associated with this object.
      */
-    public get signal(): AbortSignal {
+    get signal() {
         return getSignal(this)
     }
 
     /**
      * Abort and signal to any observers that the associated activity is to be aborted.
      */
-    public abort(): void {
+    abort() {
         abortSignal(getSignal(this))
     }
 }
@@ -26,12 +32,12 @@ export default class AbortController {
 /**
  * Associated signals.
  */
-const signals = new WeakMap<AbortController, AbortSignal>()
+const signals = new WeakMap()
 
 /**
  * Get the associated signal of a given controller.
  */
-function getSignal(controller: AbortController): AbortSignal {
+function getSignal(controller) {
     const signal = signals.get(controller)
     if (signal == null) {
         throw new TypeError(
@@ -56,4 +62,6 @@ if (typeof Symbol === "function" && typeof Symbol.toStringTag === "symbol") {
     })
 }
 
-export { AbortController, AbortSignal }
+exports.AbortController = AbortController
+exports.AbortSignal = AbortSignal
+module.exports = AbortController

@@ -37,7 +37,7 @@ const {
 module.exports = Readable
 Readable.ReadableState = ReadableState
 
-const { EventEmitter: EE } = require('events')
+const { EventEmitter: EE } = require('../../../events')
 const { Buffer } = require('../../../buffer')
 const { Stream, prependListener } = require('./legacy')
 
