@@ -1,4 +1,4 @@
-import { InvBuffer, ArrayInvBuffer } from '.'
+import { InvBuffer, ArrayInvBuffer } from './'
 import { 
     intToByteArray, TStrictIntType,
 } from './utils'
@@ -23,12 +23,12 @@ export class InvBigInt {
     number = () => Number(this._v)
 
     to = () => {
-        const buffer = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))
+        const bytes = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))
 
-        const string = (valtype: TIntType) => buffer(valtype).to().string()
+        const string = (valtype: TIntType) => bytes(valtype).to().string()
 
         return {
-            buffer,
+            bytes,
             string
         }
 
@@ -36,8 +36,6 @@ export class InvBigInt {
 }
 
 export class ArrayInvBigInt extends Array<InvBigInt> {
-
-    // static fromBuffers = (list: InvBuffer)
 
     static fromNumbers = (list: number[]) => {
         const ret = new ArrayInvBigInt(0)
@@ -82,7 +80,7 @@ export class ArrayInvBigInt extends Array<InvBigInt> {
     toArrayNumber = () => this.map((v: InvBigInt) => v.number())
     toArrayBuffer = (valtype: TIntType) => {
         const ret = new ArrayInvBuffer(0)
-        ret.push(...this.map((v: InvBigInt) => v.to().buffer(valtype)))
+        ret.push(...this.map((v: InvBigInt) => v.to().bytes(valtype)))
         return ret
     }
     toArrayHex = (valtype: TIntType) => this.map((v: InvBigInt) => v.to().string(valtype).hex())

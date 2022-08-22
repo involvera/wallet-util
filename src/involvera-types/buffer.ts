@@ -1,24 +1,41 @@
-import { base58, Buffer } from '../../ext_src/'
-import { InvBigInt, PubKey as PublicKey, PubKH as PublicKeyHashed, ArrayInvBigInt } from '.'
+import { InvBigInt, ArrayInvBigInt, PubKH as PublicKeyHashed, PubKey as PublicKey } from './'
 import { TIntType } from './bigint'
 import { decodeInt } from './utils'
+import { Hash } from '../../ext_src'
 
-export class InvBuffer extends Buffer {
+const { 
+    BytesToBase58,
+    BytesToBase64,
+    Base58ToBytes,
+    Base64ToBytes,
+    HexToBytes,
+    BytesToHex,
+    UTF8ToBytes,
+} = Hash
 
-    static fromNumber = (n: number, intType: TIntType) => new InvBigInt(BigInt(n)).to().buffer(intType)
-    static from64 = (str: string) => new InvBuffer(Buffer.from(str, 'base64'))
-    static from58 = (str: string) => new InvBuffer(Buffer.from(base58.decode(str)))
-    static fromHex = (str: string) => new InvBuffer(Buffer.from(str, 'hex'))
+export class InvBuffer {
+
+    static fromRaw = (str: string) => new InvBuffer(UTF8ToBytes(str))
+    static fromNumber = (n: number, intType: TIntType) => new InvBigInt(BigInt(n)).to().bytes(intType)
+    static from64 = (str: string) => new InvBuffer(Base64ToBytes(str))
+    static from58 = (str: string) => new InvBuffer(Base58ToBytes(str))
+    static fromHex = (str: string) => new InvBuffer(HexToBytes(str))
+
+    private buffer: Uint8Array
+    constructor(buffer: Uint8Array | number[]){
+        this.buffer = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer)
+
+    }
 
     to = () =>  {
-        const int = (isNegative: boolean | void) => new InvBigInt(decodeInt(this, !!isNegative))
+        const int = (isNegative: boolean | void) => new InvBigInt(decodeInt(this.bytes(), !!isNegative))
         
         const string = () => {
             return {
                 raw: () => this.toString(),
-                hex: () => this.toString('hex'),
-                base64: () => this.toString('base64'),
-                base58: () => base58.encode(this)
+                hex: () => BytesToHex(this.bytes()),
+                base64: () => BytesToBase64(this.bytes()),
+                base58: () => BytesToBase58(this.bytes())
             }
         }     
 
@@ -28,53 +45,27 @@ export class InvBuffer extends Buffer {
         }   
     }
 
+    bytes = () => this.buffer
+
     format = () => {
         return {
-            pubKH: () => new PublicKeyHashed(this),
-            pubK: () => new PublicKey(this),
-            buffer: () => this as Buffer
+            pubKH: () => new PublicKeyHashed(this.bytes()),
+            pubK: () => new PublicKey(this.bytes())        
         }
     }
 }
 
 export class ArrayInvBuffer extends Array<InvBuffer> {
 
-    static fromNumbers = (list: number[], intType: TIntType) => {
-        const ret = new ArrayInvBuffer(0)
-        for (let n of list){
-            ret.push(new InvBigInt(BigInt(n)).to().buffer(intType))
-        }
-        return ret
-    }
-    
-    static from64 = (list: string[]) => {
-        const ret = new ArrayInvBuffer(0)
-        for (let str of list){
-            ret.push(new InvBuffer(Buffer.from(str, 'base64')))
-        }
-        return ret
-    }
-
-    static from58 = (list: string[]) => {
-        const ret = new ArrayInvBuffer(0)
-        for (let str of list){
-            ret.push(new InvBuffer(Buffer.from(base58.decode(str))))
-        }
-        return ret
-    }
-
-    static fromHex = (list: string[]) => {
-        const ret = new ArrayInvBuffer(0)
-        for (let str of list){
-            ret.push(new InvBuffer(Buffer.from(str, 'hex')))
-        }
-        return ret
-    }
+    static fromNumbers = (list: number[], intType: TIntType) => list.map((n: number) => InvBuffer.fromNumber(n, intType))
+    static from64 = (list: string[]) => list.map((str: string) => InvBuffer.from64(str))
+    static from58 = (list: string[]) => list.map((str: string) => InvBuffer.from58(str))
+    static fromHex = (list: string[]) =>list.map((str: string) => InvBuffer.fromHex(str))
 
     totalLength = () => {
         let count: number = 0;
         for (let b of this)
-            count += b.length
+            count += b.bytes().length
         return count
     }
 
@@ -85,7 +76,7 @@ export class ArrayInvBuffer extends Array<InvBuffer> {
         ret.push(...this.map((v: InvBuffer) => v.to().int()))
         return ret
     }
-    toArrayBuffer = () => this.map((v: InvBuffer) => v.format().buffer())
+    toDoubleUInt8Array = () => this.map((v: InvBuffer) => v.bytes())
 }
 
 

@@ -1,12 +1,13 @@
-import { BIP39, BIP32, Buffer } from '../../ext_src'
-import { PrivKey } from '.'
-
+import { BIP39, BIP32 } from '../../ext_src'
+import {InvBuffer, PrivKey} from './'
+import {wordlist} from '../../ext_src/bip39/src/wordlists/english'
 
 export default class Mnemonic {
     
-    static IsValidMnemonic = (mnemonic: string): boolean => BIP39.validateMnemonic(mnemonic)
-    static NewMnemonic = () => new Mnemonic(BIP39.generateMnemonic())
+    static IsValidMnemonic = (mnemonic: string): boolean => BIP39.validateMnemonic(mnemonic, wordlist)
+    static NewMnemonic = () => new Mnemonic(BIP39.generateMnemonic(wordlist))
     private _mnemonic: string
+    
     constructor(mnemonic: string){
         if (!Mnemonic.IsValidMnemonic(mnemonic)){
             throw new Error("Invalid mnemonic")
@@ -15,8 +16,8 @@ export default class Mnemonic {
     }
 
     get = () => this._mnemonic
-    private seed = () => new Buffer(new Uint8Array(BIP39.mnemonicToSeedSync(this.get())))
-    private master = () => BIP32.fromSeed(this.seed())
+    private seed = () => new InvBuffer(new Uint8Array(BIP39.mnemonicToSeedSync(this.get())))
+    private master = () => BIP32.fromMasterSeed(this.seed().bytes())
 
     wallet = () => new PrivKey(this.master()).derive('m/0/0')
 

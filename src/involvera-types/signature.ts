@@ -1,6 +1,6 @@
-import * as ec from 'tiny-secp256k1'
-import { Buffer, base58 } from "../../ext_src"
-import { InvBuffer, PubKey } from '.'
+import { SECP256K1 } from '../../ext_src'
+import { InvBuffer, PubKey } from './'
+import { normalizeToUint8Array } from './utils'
 
 export interface IPlainSig {
     public_key: string
@@ -9,20 +9,20 @@ export interface IPlainSig {
 
 export default class Signature extends InvBuffer {
 
-    static from64 = (str: string) => new Signature(Buffer.from(str, 'base64'))
-    static from58 = (str: string) => new Signature(Buffer.from(base58.decode(str)))
-    static fromHex = (str: string) => new Signature(Buffer.from(str, 'hex'))
+    static from64 = (str: string) => new Signature(InvBuffer.from64(str))
+    static from58 = (str: string) => new Signature(InvBuffer.from58(str))
+    static fromHex = (str: string) => new Signature(InvBuffer.fromHex(str))
 
     _pubk: PubKey | null = null
-    constructor(signature: Buffer | IPlainSig){
-        super(Buffer.isBuffer(signature) ? signature as Buffer : Signature.fromHex(signature.signature))
-        if (!Buffer.isBuffer(signature))
+    constructor(signature: InvBuffer | IPlainSig | Uint8Array){
+        super(signature instanceof InvBuffer || signature instanceof Uint8Array ? normalizeToUint8Array(signature) : Signature.fromHex(signature.signature).bytes())
+        if (!(signature instanceof InvBuffer || signature instanceof Uint8Array))
             this._pubk = PubKey.fromHex(signature.public_key)
     }
 
     private throwErrorIfNotPlain = () => {
         if (!this._pubk){
-            throw new Error("You can't verify/access an object as signature if the Signature Class has been instance with a buffer as signature")
+            throw new Error("You can't verify/access an object as signature if the Signature Class has been instance with a uint8array as signature")
         }
     }
 
@@ -32,28 +32,21 @@ export default class Signature extends InvBuffer {
                 this.throwErrorIfNotPlain()
                 return {
                     public_key: this._pubk?.to().string().hex() as string,
-                    signature: this.toString('hex')
+                    signature: this.to().string().hex()
                 }
             }
         }
     }
     
-    verifyWithPubK = (v: InvBuffer | Buffer | string, pubK: PubKey) => {
-        let value: Buffer
-        if (typeof v === 'string')
-            value = Buffer.from(v)
-        else
-            value = v
-
-        
+    verifyWithPubK = (v: InvBuffer | Uint8Array | string, pubK: PubKey) => {
         try {
-            return ec.verify(value, pubK, this)
+            return SECP256K1.verify(this.bytes(), normalizeToUint8Array(v), pubK.bytes())
         } catch (e){
             return false
         }
     }
 
-    verify = (v: InvBuffer | Buffer | string) => {
+    verify = (v: InvBuffer | Uint8Array | string) => {
         this.throwErrorIfNotPlain()
         return this.verifyWithPubK(v, this._pubk as PubKey)
     }

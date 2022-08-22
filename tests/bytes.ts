@@ -17,15 +17,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([211, 255, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64() );
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int(true).big()).to.eq(INT_8)
@@ -46,15 +46,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([139, 255, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int(true).big()).to.eq(INT_8)
@@ -74,15 +74,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255, 255, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int(true).big()).to.eq(INT_8)
@@ -102,15 +102,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([237, 255, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int(true).big()).to.eq(INT_8)
@@ -129,15 +129,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([1, 0, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int().big()).to.eq(INT_8)
@@ -156,15 +156,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([21, 0, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int().big()).to.eq(INT_8)
@@ -183,15 +183,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([90, 0, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int().big()).to.eq(INT_8)
@@ -210,15 +210,15 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([121, 0, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT_8).to().string('int8').base64()).to.equal(INT_8_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT_8).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT_8).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT_8).to().buffer('int8').toString()).to.equal(INT_8_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT_8).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int8').toString()).to.equal(INT_8_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT_8).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_8_BYTES.to().int().big()).to.eq(INT_8)
@@ -236,13 +236,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([208, 216, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int(true).big()).to.eq(INT)
@@ -259,13 +259,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([219, 253, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int(true).big()).to.eq(INT)
@@ -283,13 +283,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([175, 240, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int(true).big()).to.eq(INT)
@@ -306,13 +306,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([139, 141, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int(true).big()).to.eq(INT)
@@ -329,13 +329,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([125, 38, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int().big()).to.eq(INT)
@@ -355,13 +355,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([128, 0, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int().big()).to.eq(INT)
@@ -378,13 +378,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([103, 125, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int().big()).to.eq(INT)
@@ -401,13 +401,13 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([24, 16, 0, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int16').hex()).to.equal(INT_16_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int16').toString()).to.equal(INT_16_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int16').toString()).to.equal(INT_16_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_16_BYTES.to().int().big()).to.eq(INT)
@@ -423,11 +423,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255, 127, 255, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int(true).big()).to.eq(INT)
@@ -444,11 +444,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([117, 106, 235, 255, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int(true).big()).to.eq(INT)
@@ -465,11 +465,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([235, 50, 164, 248, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int(true).big()).to.eq(INT)
@@ -486,11 +486,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0, 225, 245, 133, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int(true).big()).to.eq(INT)
@@ -507,11 +507,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([3, 119, 1, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int().big()).to.eq(INT)
@@ -528,11 +528,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([87, 55, 161, 55, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int().big()).to.eq(INT)
@@ -549,11 +549,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255, 17, 122, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int().big()).to.eq(INT)
@@ -570,11 +570,11 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0, 27, 183, 0, 0, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
+        expect(new InvBigInt(INT).to().string('int32').base64()).to.equal(INT_32_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
 
-        expect(new InvBigInt(INT).to().buffer('int32').toString()).to.equal(INT_32_BYTES.toString());
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int32').toString()).to.equal(INT_32_BYTES.toString());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_32_BYTES.to().int().big()).to.eq(INT)
@@ -590,9 +590,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255,255 ,255, 127, 255, 255, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int(true).big()).to.eq(INT)
@@ -608,9 +608,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0, 112, 15, 68 ,107, 251, 255, 255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int(true).big()).to.eq(INT)
@@ -626,9 +626,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0, 0, 0 ,0 ,0, 0, 0 ,128])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int(true).big()).to.eq(INT)
@@ -644,9 +644,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0, 50 ,55 ,225, 203, 255 ,255 ,255])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int(true).big()).to.eq(INT)
@@ -663,10 +663,10 @@ describe('Testing int encoding/decoding', () => {
     const RAND_POS_INT_64_3 = BigInt("9372036854775807")
     const RAND_POS_INT_64_4 = BigInt(9_000_000_000_000)
     
-    const RAND_POS_INT_64_1_BYTES = Buffer.from([1, 0, 0, 0, 1, 0, 0, 0])
-    const RAND_POS_INT_64_2_BYTES = Buffer.from([255, 207, 132, 14, 56, 8, 0, 0])
-    const RAND_POS_INT_64_3_BYTES = Buffer.from([255, 255, 140, 95, 209, 75, 33, 0])
-    const RAND_POS_INT_64_4_BYTES = Buffer.from([0 ,144, 205, 121, 47, 8, 0, 0])
+    const RAND_POS_INT_64_1_BYTES = new Buffer([1, 0, 0, 0, 1, 0, 0, 0])
+    const RAND_POS_INT_64_2_BYTES = new Buffer([255, 207, 132, 14, 56, 8, 0, 0])
+    const RAND_POS_INT_64_3_BYTES = new Buffer([255, 255, 140, 95, 209, 75, 33, 0])
+    const RAND_POS_INT_64_4_BYTES = new Buffer([0 ,144, 205, 121, 47, 8, 0, 0])
     
 
     it('positive int64 1/4', () => {
@@ -674,9 +674,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([1, 0, 0, 0, 1, 0, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int().big()).to.eq(INT)
@@ -692,9 +692,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255, 207, 132, 14, 56, 8, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int().big()).to.eq(INT)
@@ -710,9 +710,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([255, 255, 140, 95, 209, 75, 33, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int().big()).to.eq(INT)
@@ -728,9 +728,9 @@ describe('Testing int encoding/decoding', () => {
         const INT_64_BYTES = new Buffer([0 ,144, 205, 121, 47, 8, 0, 0])
 
         //Encoding
-        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.toString('base64'));
-        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.toString('hex'));
-        expect(new InvBigInt(INT).to().buffer('int64').toString()).to.equal(INT_64_BYTES.toString());
+        expect(new InvBigInt(INT).to().string('int64').base64()).to.equal(INT_64_BYTES.to().string().base64());
+        expect(new InvBigInt(INT).to().string('int64').hex()).to.equal(INT_64_BYTES.to().string().hex());
+        expect(new InvBigInt(INT).to().bytes('int64').toString()).to.equal(INT_64_BYTES.toString());
 
         //Decoding
         expect(INT_64_BYTES.to().int().big()).to.eq(INT)
@@ -745,7 +745,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8 = BigInt(127)
         const MAX_INT_8_BYTES = new Buffer([127, 0, 0 ,0])
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -755,7 +755,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_16 = BigInt(32_767)
         const MAX_INT_16_BYTES = new Buffer([255 ,127, 0, 0])
 
-        expect(new InvBigInt(MAX_INT_16).to().buffer('int32').toString()).to.equal(MAX_INT_16_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_16).to().bytes('int32').toString()).to.equal(MAX_INT_16_BYTES.toString());
         expect(MAX_INT_16_BYTES.to().int().big()).to.eq(MAX_INT_16)
         expect(MAX_INT_16_BYTES.to().int().number()).to.eq(Number(MAX_INT_16))
         expect(MAX_INT_16_BYTES.to().int().to().string('int32').base64()).to.eq(MAX_INT_16_BYTES.to().string().base64())
@@ -765,7 +765,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_16 = BigInt(2_147_483_647)
         const MAX_INT_16_BYTES = new Buffer([255 ,255 ,255, 127])
 
-        expect(new InvBigInt(MAX_INT_16).to().buffer('int32').toString()).to.equal(MAX_INT_16_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_16).to().bytes('int32').toString()).to.equal(MAX_INT_16_BYTES.toString());
         expect(MAX_INT_16_BYTES.to().int().big()).to.eq(MAX_INT_16)
         expect(MAX_INT_16_BYTES.to().int().number()).to.eq(Number(MAX_INT_16))
         expect(MAX_INT_16_BYTES.to().int().to().string('int32').base64()).to.eq(MAX_INT_16_BYTES.to().string().base64())
@@ -775,7 +775,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_16 = BigInt("9223372036854775807")
         const MAX_INT_16_BYTES = new Buffer([255 ,255, 255, 255, 255, 255, 255, 127])
 
-        expect(new InvBigInt(MAX_INT_16).to().buffer('int64').toString()).to.equal(MAX_INT_16_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_16).to().bytes('int64').toString()).to.equal(MAX_INT_16_BYTES.toString());
         expect(MAX_INT_16_BYTES.to().int().big()).to.eq(MAX_INT_16)
         expect(MAX_INT_16_BYTES.to().int().number()).to.eq(Number(MAX_INT_16))
         expect(MAX_INT_16_BYTES.to().int().to().string('int64').base64()).to.eq(MAX_INT_16_BYTES.to().string().base64())
@@ -785,7 +785,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([128, 255, 255, 255])
         const MAX_INT_8 = BigInt(-128)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int(true).big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int(true).number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int(true).to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -795,7 +795,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([0, 128, 255, 255])
         const MAX_INT_8 = BigInt(-32_768)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int(true).big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int(true).number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int(true).to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -805,7 +805,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([0, 0, 0 ,128])
         const MAX_INT_8 = BigInt(-2_147_483_648)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int(true).big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int(true).number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int(true).to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -815,7 +815,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([0, 0, 0, 0, 0, 0, 0, 128])
         const MAX_INT_8 = BigInt("-9223372036854775808")
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int64').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int64').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int(true).big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int(true).number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int(true).to().string('int64').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -826,8 +826,8 @@ describe('Testing int encoding/decoding', () => {
         const INT_BYTES_2 = new Buffer([255])
         const MAX_INT_8 = BigInt(255)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('uint8').to().string().raw()).to.equal(INT_BYTES_2.toString());
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint8').to().string().raw()).to.equal(INT_BYTES_2.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -838,8 +838,8 @@ describe('Testing int encoding/decoding', () => {
         const INT_BYTES_2 = new Buffer([255, 255])
         const MAX_INT_8 = BigInt(65_535)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('uint16').to().string().raw()).to.equal(INT_BYTES_2.toString());
-        expect(new InvBigInt(MAX_INT_8).to().buffer('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint16').to().string().raw()).to.equal(INT_BYTES_2.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('int32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -849,7 +849,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([255, 255, 255, 255])
         const MAX_INT_8 = BigInt(4294967295)
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('uint32').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('uint32').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -859,7 +859,7 @@ describe('Testing int encoding/decoding', () => {
         const MAX_INT_8_BYTES = new Buffer([255, 255, 255, 255, 255,255,255,255])
         const MAX_INT_8 = BigInt("18446744073709551615")
 
-        expect(new InvBigInt(MAX_INT_8).to().buffer('uint64').toString()).to.equal(MAX_INT_8_BYTES.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint64').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
         expect(MAX_INT_8_BYTES.to().int().to().string('uint64').base64()).to.eq(MAX_INT_8_BYTES.to().string().base64())
@@ -889,78 +889,78 @@ describe('Testing int encoding/decoding', () => {
         const MIN_INT_64 = BigInt("-9223372036854775808")
 
         //Negative ints
-        expect(() => new InvBigInt(NEG_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_8).to().buffer('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_8).to().bytes('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_8).to().bytes('uint8').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(NEG_INT_16).to().buffer('int8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_16).to().buffer('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_16).to().bytes('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_16).to().bytes('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_16).to().bytes('uint16').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(NEG_INT_32).to().buffer('int16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_32).to().buffer('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_32).to().bytes('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_32).to().bytes('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_32).to().bytes('uint32').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(NEG_INT_64).to().buffer('int32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_64).to().buffer('uint32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(NEG_INT_64).to().buffer('uint64').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().bytes('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().bytes('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().bytes('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(NEG_INT_64).to().bytes('uint64').toString()).to.throw(Error)
 
         //Positive ints
-        expect(() => new InvBigInt(POS_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_8).to().buffer('uint8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_8).to().bytes('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_8).to().bytes('uint8').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(POS_INT_16).to().buffer('int8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_16).to().buffer('uint8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_16).to().buffer('uint16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().bytes('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().bytes('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().bytes('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_16).to().bytes('uint16').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('int16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint32').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('int64').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_32).to().buffer('uint64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('uint32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_32).to().bytes('uint64').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(POS_INT_64).to().buffer('int32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_64).to().buffer('uint32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(POS_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(POS_INT_64).to().buffer('uint64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().bytes('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().bytes('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().bytes('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(POS_INT_64).to().bytes('uint64').toString()).to.not.throw(Error)
 
         //MAX UINTS
-        expect(() => new InvBigInt(MAX_UINT_8).to().buffer('int8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_8).to().buffer('uint8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_8).to().bytes('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_8).to().bytes('uint8').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('int8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('uint8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('int16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_16).to().buffer('uint16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().bytes('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().bytes('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().bytes('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_16).to().bytes('uint16').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('int16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('uint16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('int32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_32).to().buffer('uint32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().bytes('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().bytes('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().bytes('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_32).to().bytes('uint32').toString()).to.not.throw(Error)
 
-        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('int32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('uint32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('int64').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MAX_UINT_64).to().buffer('uint64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().bytes('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().bytes('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().bytes('int64').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MAX_UINT_64).to().bytes('uint64').toString()).to.not.throw(Error)
     
 
         //MIN INTS
-        expect(() => new InvBigInt(MIN_INT_8).to().buffer('int8').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_8).to().buffer('uint8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_8).to().bytes('int8').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_8).to().bytes('uint8').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(MIN_INT_16).to().buffer('int8').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_16).to().buffer('int16').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_16).to().buffer('uint16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_16).to().bytes('int8').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_16).to().bytes('int16').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_16).to().bytes('uint16').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(MIN_INT_32).to().buffer('int16').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_32).to().buffer('int32').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_32).to().buffer('uint32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_32).to().bytes('int16').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_32).to().bytes('int32').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_32).to().bytes('uint32').toString()).to.throw(Error)
 
-        expect(() => new InvBigInt(MIN_INT_64).to().buffer('int32').toString()).to.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_64).to().buffer('int64').toString()).to.not.throw(Error)
-        expect(() => new InvBigInt(MIN_INT_64).to().buffer('uint64').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_64).to().bytes('int32').toString()).to.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_64).to().bytes('int64').toString()).to.not.throw(Error)
+        expect(() => new InvBigInt(MIN_INT_64).to().bytes('uint64').toString()).to.throw(Error)
         
 
     })

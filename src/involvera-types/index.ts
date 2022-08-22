@@ -8,8 +8,6 @@ import PubKH from "./pubkey-hashed";
 import Signature from "./signature";
 import TxHash from "./tx-hash";
 
-
-
 export {
     Address,
     ArrayInvBuffer,

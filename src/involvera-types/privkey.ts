@@ -1,13 +1,13 @@
-import { BIP32, Buffer, BIP32Interface } from '../../ext_src'
-import { Signature, PubKey, InvBuffer } from '.'
-
+import { BIP32 } from '../../ext_src'
+import {InvBuffer, PubKey, Signature} from './'
+import { normalizeToUint8Array } from './utils'
 
 export default class PrivateKey {
 
-    static fromBase58 = (base58Wallet: string) => new PrivateKey(BIP32.fromBase58(base58Wallet))
+    static fromBase58 = (base58Wallet: string) => new PrivateKey(BIP32.fromExtendedKey(base58Wallet))
 
-    private _key: BIP32Interface
-    constructor(key: BIP32Interface){
+    private _key: BIP32
+    constructor(key: BIP32){
         if (!key.privateKey){
             throw new Error("Not a private key")
         }
@@ -16,21 +16,14 @@ export default class PrivateKey {
 
     private get = () => this._key
 
-    bytes = () => this.get().privateKey as Buffer
-    publicKey = () => new PubKey(this.get().publicKey)
-    toBase58 = () => this.get().toBase58()
-    derive = (path: string) => new PrivateKey(this.get().derivePath(path))
-
-    sign = (v: Buffer | InvBuffer | string) => {
-        let value: Buffer
-        if (typeof v === 'string')
-            value = Buffer.from(v)
-        else
-            value = v
-            
+    bytes = () => new InvBuffer(this.get().privateKey as Uint8Array)
+    publicKey = () => new PubKey(this.get().publicKey as Uint8Array)
+    toBase58 = () => this.get().privateExtendedKey
+    derive = (path: string) => new PrivateKey(this.get().derive(path))
+    sign = (v: Uint8Array | InvBuffer | string) => {
         return new Signature({
             public_key: this.publicKey().to().string().hex(),
-            signature: this.get().sign(value).toString('hex')
+            signature: new InvBuffer(this.get().sign(normalizeToUint8Array(v))).to().string().hex()
         })
     }
 

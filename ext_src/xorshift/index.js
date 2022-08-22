@@ -102,14 +102,12 @@
   function getRandomSeed() {
       return Math.random() * Math.pow(2, 32);
   }
-  module.exports = new XorShift([
+
+  // Export constructor under its own name so that consumers using ES2015
+  // can write `import { XorShift } from 'xorshift'`.
+  export default new XorShift([
     getRandomSeed(),
     getRandomSeed(),
     getRandomSeed(),
     getRandomSeed()
   ]);
-  
-  // Export constructor under its own name so that consumers using ES2015
-  // can write `import { XorShift } from 'xorshift'`.
-  module.exports.XorShift = XorShift;
-  export default XorShift

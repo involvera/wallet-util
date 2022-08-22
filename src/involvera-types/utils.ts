@@ -1,4 +1,5 @@
-import { Buffer } from "../../ext_src" 
+import { InvBuffer } from "./"
+
 export const MAX_UINT_8 = BigInt(256)
 export const MAX_UINT_16 = BigInt(65536)
 export const MAX_UINT_32 = BigInt(4294967296)
@@ -11,7 +12,7 @@ export const MINUS = BigInt(-1)
 
 export type TStrictIntType = 'int8' | 'int16' | 'int32' | 'int64'
 
-export const intToByteArray = (val: BigInt, valType: TStrictIntType, isUnsigned: boolean): Buffer => {
+export const intToByteArray = (val: BigInt, valType: TStrictIntType, isUnsigned: boolean): Uint8Array => {
     const M = {'int8': MAX_UINT_8, 'int16': MAX_UINT_16, 'int32': MAX_UINT_32, 'int64': MAX_UINT_64}[valType]
     const N_BYTE = {'int8': 8, 'int16': 16, 'int32': 32, 'int64': 64}[valType]
     const CURRENT_MIN_INT = (M / TWO) * MINUS
@@ -39,11 +40,11 @@ export const intToByteArray = (val: BigInt, valType: TStrictIntType, isUnsigned:
         ret.push(parseInt(binary.substr(i, 8), 2))
         i += 8
     }
-    return Buffer.from(ret.reverse())
+    return new Uint8Array(ret.reverse())
 }
 
 
-export const decodeInt = (value: Buffer, isNegative: boolean): BigInt => {
+export const decodeInt = (value: Uint8Array, isNegative: boolean): BigInt => {
     let n = BigInt(0);
     let MAX = MAX_UINT_8
     switch(value.length){
@@ -61,7 +62,16 @@ export const decodeInt = (value: Buffer, isNegative: boolean): BigInt => {
             break;
     }
 
-    const readBigUInt64LE = (buffer: Buffer, offset = 0) => {
+    const uint8ArrayInt16ToBigInt = (buf: Uint8Array) => {
+        let arr = new Uint8Array(buf);
+        let result = BigInt(0);
+        for (let i = arr.length - 1; i >= 0; i--) {
+          result = result * BigInt(256) + BigInt(arr[i]);
+        }
+        return result;
+      }
+
+    const readBigUInt64LE = (buffer: Uint8Array, offset = 0) => {
         const first = buffer[offset];
         const last = buffer[offset + 7];
         if (first === undefined || last === undefined) {
@@ -82,14 +92,14 @@ export const decodeInt = (value: Buffer, isNegative: boolean): BigInt => {
     }
 
     if (value.length == 8) {
-        n = readBigUInt64LE(Buffer.from(value), 0)
+        n = readBigUInt64LE(value, 0)
     } else {
         switch (value.length){
             case 4:
-                n = BigInt(Buffer.from(value).readUInt32LE(0))
+                n = uint8ArrayInt16ToBigInt(value)
                 break;
             case 2:
-                n = BigInt(Buffer.from(value).readUInt16LE(0))
+                n = uint8ArrayInt16ToBigInt(value)
                 break;
             case 1:
                 n = BigInt(value[0])
@@ -98,4 +108,12 @@ export const decodeInt = (value: Buffer, isNegative: boolean): BigInt => {
         }
     }
     return isNegative ? n - MAX : n
+}
+
+export const normalizeToUint8Array = (d: InvBuffer | Uint8Array | string ) => {
+    if (d instanceof InvBuffer)
+        return d.bytes()
+    if (typeof d === 'string')
+        return InvBuffer.fromRaw(d).bytes()
+    return d
 }
