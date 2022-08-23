@@ -55,6 +55,15 @@ describe('Testing Types Class', () => {
         expect(sig2.verifyWithPubK(DATA_TO_SIGN, mnemonic.wallet().publicKey())).to.eq(true)
         expect(sig2.verifyWithPubK(WRONG_DATA_TO_SIGN, mnemonic.wallet().publicKey())).to.eq(false)
         expect(sig2.verifyWithPubK(DATA_TO_SIGN, mnemonic.deriveForContent(1).publicKey())).to.eq(false)
+
+        const sig3 = mnemonic.wallet().sign('Hello')
+        expect(sig3.verify('Hello')).to.eq(true)
+        expect(sig3.verify('hello')).to.eq(false)
+
+        const sig4 = mnemonic.wallet().sign('Hello')
+        expect(sig4.verifyWithPubK('Hello', mnemonic.wallet().publicKey())).to.eq(true)
+        expect(sig4.verifyWithPubK('hello', mnemonic.wallet().publicKey())).to.eq(false)
+        expect(sig4.verifyWithPubK('Hello', mnemonic.deriveForContent(1).publicKey())).to.eq(false)
     })
 
 })
