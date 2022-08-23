@@ -1,4 +1,5 @@
 import { SECP256K1 } from '../../ext_src'
+import { Sha256 } from '../../ext_src/hash'
 import { InvBuffer, PubKey } from './'
 import { normalizeToUint8Array } from './utils'
 
@@ -9,9 +10,16 @@ export interface IPlainSig {
 
 export default class Signature extends InvBuffer {
 
+    static MSG_LENGTH = 32
+
     static from64 = (str: string) => new Signature(InvBuffer.from64(str))
     static from58 = (str: string) => new Signature(InvBuffer.from58(str))
     static fromHex = (str: string) => new Signature(InvBuffer.fromHex(str))
+    
+    static formatSignatureContent = (msg: InvBuffer | Uint8Array | string) => {
+        const nMsg = normalizeToUint8Array(msg)
+        return nMsg.length === Signature.MSG_LENGTH ? nMsg : Sha256(nMsg)
+    }
 
     _pubk: PubKey | null = null
     constructor(signature: InvBuffer | IPlainSig | Uint8Array){
@@ -40,7 +48,7 @@ export default class Signature extends InvBuffer {
     
     verifyWithPubK = (v: InvBuffer | Uint8Array | string, pubK: PubKey) => {
         try {
-            return SECP256K1.verify(this.bytes(), normalizeToUint8Array(v), pubK.bytes())
+            return SECP256K1.verify(this.bytes(), Signature.formatSignatureContent(v), pubK.bytes())
         } catch (e){
             return false
         }

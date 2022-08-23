@@ -1,4 +1,4 @@
-import { InvBigInt, ArrayInvBigInt, PubKH as PublicKeyHashed, PubKey as PublicKey } from './'
+import { InvBigInt, ArrayInvBigInt, PubKH as PublicKeyHashed, PubKey as PublicKey, Signature, TxHash } from './'
 import { TIntType } from './bigint'
 import { decodeInt } from './utils'
 import { Hash } from '../../ext_src'
@@ -50,7 +50,9 @@ export class InvBuffer {
     format = () => {
         return {
             pubKH: () => new PublicKeyHashed(this.bytes()),
-            pubK: () => new PublicKey(this.bytes())        
+            pubK: () => new PublicKey(this.bytes()), 
+            signature: () => new Signature(this.bytes()),
+            txHash: () => new TxHash(this.bytes())
         }
     }
 }

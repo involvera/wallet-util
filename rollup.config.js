@@ -6,6 +6,12 @@ import pkg from './package.json'
 
 const config = {
     input: './index.ts',
+    onwarn: function ( warning, next ) {
+        if ( warning.code === 'UNRESOLVED_IMPORT' ) return;
+        if ( warning.code === 'CIRCULAR_DEPENDENCY' ) return;
+        if ( warning.code === 'MISSING_GLOBAL_NAME' ) return;
+        next( warning );
+    },
     output: [
         {
             file: pkg.main,

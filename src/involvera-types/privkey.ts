@@ -23,7 +23,7 @@ export default class PrivateKey {
     sign = (v: Uint8Array | InvBuffer | string) => {
         return new Signature({
             public_key: this.publicKey().to().string().hex(),
-            signature: new InvBuffer(this.get().sign(normalizeToUint8Array(v))).to().string().hex()
+            signature: new InvBuffer(this.get().sign(Signature.formatSignatureContent(v))).to().string().hex()
         })
     }
 
