@@ -1,7 +1,7 @@
 import { SECP256K1 } from '../../ext_src'
-import { Sha256 } from '../../ext_src/hash'
+import { RandomBytes, Sha256 } from '../../ext_src/hash'
 import { InvBuffer, PubKey } from './'
-import { normalizeToUint8Array } from './utils'
+import { generateRandomIntRange, normalizeToUint8Array } from './utils'
 
 export interface IPlainSig {
     public_key: string
@@ -11,7 +11,11 @@ export interface IPlainSig {
 export default class Signature extends InvBuffer {
 
     static MSG_LENGTH = 32
+    static LENGTH_MIN = 64
+    static LENGTH_MAX = 72
 
+
+    static random = () => new Signature(RandomBytes(generateRandomIntRange(66, 72)))
     static from64 = (str: string) => new Signature(InvBuffer.from64(str))
     static from58 = (str: string) => new Signature(InvBuffer.from58(str))
     static fromHex = (str: string) => new Signature(InvBuffer.fromHex(str))
@@ -21,11 +25,20 @@ export default class Signature extends InvBuffer {
         return nMsg.length === Signature.MSG_LENGTH ? nMsg : Sha256(nMsg)
     }
 
+    static isValid = (sig: InvBuffer | Uint8Array | Signature) => {
+        const length = (sig instanceof Uint8Array) ? sig.length : sig.bytes().length
+        return length >= Signature.LENGTH_MIN && length <= Signature.LENGTH_MAX
+    }
+
+
     _pubk: PubKey | null = null
     constructor(signature: InvBuffer | IPlainSig | Uint8Array){
         super(signature instanceof InvBuffer || signature instanceof Uint8Array ? normalizeToUint8Array(signature) : Signature.fromHex(signature.signature).bytes())
         if (!(signature instanceof InvBuffer || signature instanceof Uint8Array))
             this._pubk = PubKey.fromHex(signature.public_key)
+        if (!Signature.isValid(this.bytes())){
+            throw new Error("Signature")
+        }
     }
 
     private throwErrorIfNotPlain = () => {

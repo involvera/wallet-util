@@ -117,3 +117,7 @@ export const normalizeToUint8Array = (d: InvBuffer | Uint8Array | string ) => {
         return InvBuffer.fromRaw(d).bytes()
     return d
 }
+
+export const generateRandomIntRange = (min: number, max: number) => {
+    return Math.floor(min + Math.random()*(max - min + 1))
+}

@@ -5,6 +5,8 @@ const ADDR_CHECKSUM_LENGTH = 4
 
 export default class Address {
 
+    static random = () => PubKH.random().toAddress()
+
     static getChecksum = (payload: Uint8Array): Uint8Array => {
         const doubleSha = Sha256(Sha256(payload))
         return doubleSha.slice(0, ADDR_CHECKSUM_LENGTH)

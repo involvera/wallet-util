@@ -1,5 +1,11 @@
 import {
     Mnemonic,
+    PubKH,
+    PubKey,
+    Address,
+    Signature,
+    TxHash,
+    PrivKey,
 } from '../src/involvera-types/index'
 
 import { expect } from 'chai'
@@ -64,6 +70,25 @@ describe('Testing Types Class', () => {
         expect(sig4.verifyWithPubK('Hello', mnemonic.wallet().publicKey())).to.eq(true)
         expect(sig4.verifyWithPubK('hello', mnemonic.wallet().publicKey())).to.eq(false)
         expect(sig4.verifyWithPubK('Hello', mnemonic.deriveForContent(1).publicKey())).to.eq(false)
+    })
+
+    it('Throw Errors', () => {
+        expect(() => new Mnemonic("hello word super define include")).to.throw(Error)
+        expect(() => new PubKH(new Uint8Array([100, 100,100,100,100]))).to.throw(Error)
+        expect(() => new PubKey(new Uint8Array([100, 100,100,100,100]))).to.throw(Error)
+        expect(() => new Signature(new Uint8Array([100, 100,100,100,100]))).to.throw(Error)
+        expect(() => new Address("1JFK3290f22")).to.throw(Error)
+        expect(() => new TxHash(new Uint8Array([100, 100,100,100,100]))).to.throw(Error)
+    })
+
+    it('Random values', () => {
+        expect(() => Mnemonic.isValid(Mnemonic.random().get()))
+        expect(() => PubKH.isValid(PubKH.random().bytes()))
+        expect(() => PubKey.isValid(PubKey.random().bytes()))
+        expect(() => Signature.isValid(Signature.random().bytes()))
+        expect(() => Address.isValid(Address.random().get()))
+        expect(() => TxHash.isValid(TxHash.random().bytes()))
+        expect(() => PrivKey.random().sign('hello'))
     })
 
 })

@@ -4,12 +4,12 @@ import {wordlist} from '../../ext_src/bip39/src/wordlists/english'
 
 export default class Mnemonic {
     
-    static IsValidMnemonic = (mnemonic: string): boolean => BIP39.validateMnemonic(mnemonic, wordlist)
-    static NewMnemonic = () => new Mnemonic(BIP39.generateMnemonic(wordlist))
+    static isValid = (mnemonic: string): boolean => BIP39.validateMnemonic(mnemonic, wordlist)
+    static random = () => new Mnemonic(BIP39.generateMnemonic(wordlist))
     private _mnemonic: string
     
     constructor(mnemonic: string){
-        if (!Mnemonic.IsValidMnemonic(mnemonic)){
+        if (!Mnemonic.isValid(mnemonic)){
             throw new Error("Invalid mnemonic")
         }
         this._mnemonic = mnemonic

@@ -4,6 +4,7 @@ require('../ext_src/secp256k1/test')
 require('../ext_src/bip32/test/hdkey.test')
 require('../ext_src/bip39/test/bip39.test')
 require('./xorshift')
+require('./aes/index.js')
+
 require('./bytes')
 require('./types-class')
-require('./aes/index.js')

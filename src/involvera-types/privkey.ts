@@ -1,9 +1,11 @@
 import { BIP32 } from '../../ext_src'
+import { RandomBytes } from '../../ext_src/hash'
 import {InvBuffer, PubKey, Signature} from './'
 import { normalizeToUint8Array } from './utils'
 
 export default class PrivateKey {
 
+    static random = () => new PrivateKey(BIP32.fromMasterSeed(RandomBytes(64)))
     static fromBase58 = (base58Wallet: string) => new PrivateKey(BIP32.fromExtendedKey(base58Wallet))
 
     private _key: BIP32

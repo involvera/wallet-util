@@ -1,11 +1,12 @@
 import { InvBuffer, Address } from './'
-import { ConcatBytes } from '../../ext_src/hash'
+import { ConcatBytes, RandomBytes } from '../../ext_src/hash'
 import { normalizeToUint8Array } from './utils'
 
 const VERSION = 0x00
 export default class PublicKeyHashed extends InvBuffer {
 
     static LENGTH = 20
+    static random = () => new PublicKeyHashed(RandomBytes(PublicKeyHashed.LENGTH))
 
     static from64 = (str: string) => new PublicKeyHashed(InvBuffer.from64(str))
     static from58 = (str: string) => new PublicKeyHashed(InvBuffer.from58(str))
