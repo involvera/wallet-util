@@ -15,12 +15,13 @@ export class InvBigInt {
     static fromNumber = (n: number) => new InvBigInt(BigInt(n))
 
     private _v: BigInt
-    constructor(i: BigInt){
-        this._v = i
+    constructor(i: BigInt | number | bigint){
+        this._v = typeof i === 'number' ? BigInt(i) : i
     }
 
     big = () => this._v
     number = () => Number(this._v)
+    
 
     to = () => {
         const bytes = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))
@@ -31,7 +32,6 @@ export class InvBigInt {
             bytes,
             string
         }
-
     }
 }
 

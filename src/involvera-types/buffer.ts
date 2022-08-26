@@ -2,6 +2,7 @@ import { InvBigInt, ArrayInvBigInt, PubKH as PublicKeyHashed, PubKey as PublicKe
 import { TIntType } from './bigint'
 import { decodeInt } from './utils'
 import { Hash } from '../../ext_src'
+import { ConcatBytes } from '../../ext_src/hash'
 
 const { 
     BytesToBase58,
@@ -11,9 +12,13 @@ const {
     HexToBytes,
     BytesToHex,
     UTF8ToBytes,
+    BytesToUTF8
 } = Hash
 
 export class InvBuffer {
+
+    static FromUint8s = (...arrays: Uint8Array[]) => new InvBuffer(ConcatBytes(...arrays))
+    static FromStrings = (...arrays: string[]) => InvBuffer.FromUint8s(...(arrays.map((s:string) => InvBuffer.fromRaw(s).bytes())))
 
     static fromRaw = (str: string) => new InvBuffer(UTF8ToBytes(str))
     static fromNumber = (n: number, intType: TIntType) => new InvBigInt(BigInt(n)).to().bytes(intType)
@@ -32,7 +37,7 @@ export class InvBuffer {
         
         const string = () => {
             return {
-                raw: () => this.toString(),
+                raw: () => BytesToUTF8(this.bytes()),
                 hex: () => BytesToHex(this.bytes()),
                 base64: () => BytesToBase64(this.bytes()),
                 base58: () => BytesToBase58(this.bytes())
@@ -45,6 +50,7 @@ export class InvBuffer {
         }   
     }
 
+    length = () => this.bytes().length
     bytes = () => this.buffer
 
     format = () => {

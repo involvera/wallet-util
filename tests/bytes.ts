@@ -826,7 +826,7 @@ describe('Testing int encoding/decoding', () => {
         const INT_BYTES_2 = new Buffer([255])
         const MAX_INT_8 = BigInt(255)
 
-        expect(new InvBigInt(MAX_INT_8).to().bytes('uint8').to().string().raw()).to.equal(INT_BYTES_2.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint8').to().string().raw()).to.equal(INT_BYTES_2.to().string().raw());
         expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
@@ -838,7 +838,7 @@ describe('Testing int encoding/decoding', () => {
         const INT_BYTES_2 = new Buffer([255, 255])
         const MAX_INT_8 = BigInt(65_535)
 
-        expect(new InvBigInt(MAX_INT_8).to().bytes('uint16').to().string().raw()).to.equal(INT_BYTES_2.toString());
+        expect(new InvBigInt(MAX_INT_8).to().bytes('uint16').to().string().raw()).to.equal(INT_BYTES_2.to().string().raw());
         expect(new InvBigInt(MAX_INT_8).to().bytes('int32').toString()).to.equal(MAX_INT_8_BYTES.toString());
         expect(MAX_INT_8_BYTES.to().int().big()).to.eq(MAX_INT_8)
         expect(MAX_INT_8_BYTES.to().int().number()).to.eq(Number(MAX_INT_8))
