@@ -50,6 +50,12 @@ export class InvBuffer {
         }   
     }
 
+    eq = (buffer: Uint8Array | InvBuffer) => {
+        if (buffer instanceof InvBuffer)
+            return buffer.to().string().raw() === this.to().string().raw()
+        return new InvBuffer(buffer).to().string().raw() === this.to().string().raw()
+    }
+
     length = () => this.bytes().length
     bytes = () => this.buffer
 

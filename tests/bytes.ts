@@ -961,7 +961,30 @@ describe('Testing int encoding/decoding', () => {
         expect(() => new InvBigInt(MIN_INT_64).to().bytes('int32').toString()).to.throw(Error)
         expect(() => new InvBigInt(MIN_INT_64).to().bytes('int64').toString()).to.not.throw(Error)
         expect(() => new InvBigInt(MIN_INT_64).to().bytes('uint64').toString()).to.throw(Error)
-        
+    })
+
+    it('Calculate', () => {
+
+        expect(new InvBigInt(400n).eq(400)).to.eq(true)
+        expect(new InvBigInt(400n).eq(400n)).to.eq(true)
+        expect(new InvBigInt(400n).eq(new InvBigInt(400))).to.eq(true)
+
+        expect(new InvBigInt(400n).eq(401)).to.eq(false)
+        expect(new InvBigInt(400n).eq(401n)).to.eq(false)
+        expect(new InvBigInt(400n).eq(new InvBigInt(401))).to.eq(false)
+
+        expect(new InvBigInt(400n).lw(401)).to.eq(true)
+        expect(new InvBigInt(400n).lw(401n)).to.eq(true)
+        expect(new InvBigInt(400n).lw(new InvBigInt(401))).to.eq(true)
+
+        expect(new InvBigInt(401n).gt(400)).to.eq(true)
+        expect(new InvBigInt(401n).gte(400)).to.eq(true)
+        expect(new InvBigInt(401n).gte(401)).to.eq(true)
+        expect(new InvBigInt(401n).gte(402)).to.eq(false)
+
+        expect(new InvBigInt(401n).lwe(402)).to.eq(true)
+        expect(new InvBigInt(401n).lwe(401)).to.eq(true)
+        expect(new InvBigInt(401n).lwe(400)).to.eq(false)
 
     })
     

@@ -10,6 +10,13 @@ const toStrictIntType = (t: TIntType): TStrictIntType => isUnsigned(t) ? (t.subs
 
 export class InvBigInt {
 
+    static normalize = (n: number | InvBigInt | BigInt) => {
+        if (n instanceof InvBigInt)
+            return n
+        return new InvBigInt(n)
+
+    }
+
     static from64 = (base64: string, isUnsigned: boolean | void) => InvBuffer.from64(base64).to().int(isUnsigned)
     static fromHex = (hex: string, isUnsigned: boolean | void) => InvBuffer.fromHex(hex).to().int(isUnsigned)
     static fromNumber = (n: number) => new InvBigInt(BigInt(n))
@@ -22,6 +29,11 @@ export class InvBigInt {
     big = () => this._v
     number = () => Number(this._v)
     
+    eq = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() === this.big()
+    gt = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() < this.big()
+    gte = (n: number | InvBigInt | BigInt) => this.eq(n) || this.gt(n)
+    lw = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() > this.big()
+    lwe = (n: number | InvBigInt | BigInt) =>  this.eq(n) || this.lw(n)
 
     to = () => {
         const bytes = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))

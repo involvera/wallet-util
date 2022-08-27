@@ -57,6 +57,10 @@ describe('Testing Types Class', () => {
 
         expect(InvBuffer.FromStrings(str, str).to().string().raw()).to.eq(str+str)
         expect(InvBuffer.FromUint8s(braw.bytes(), braw.bytes()).to().string().raw()).to.eq(str+str)
+
+        expect(InvBuffer.fromHex("abcdef1234").eq(InvBuffer.fromHex("abcdef1234"))).to.eq(true)
+        expect(InvBuffer.fromHex("abcdef1234").eq(InvBuffer.fromHex("abcdef"))).to.eq(false)
+
     })
 
     it('Mnemonic', () => {
