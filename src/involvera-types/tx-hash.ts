@@ -1,10 +1,11 @@
-import { RandomBytes } from '../../ext_src/hash'
+import { RandomBytes, Sha256 } from '../../ext_src/hash'
 import { InvBuffer } from './'
 import { normalizeToUint8Array, TBufferInitializer } from './utils'
 
 export default class TxHash extends InvBuffer {
 
     static LENGTH = 32
+    static fromUnHashed = (unhashed: TBufferInitializer) => new TxHash(Sha256(normalizeToUint8Array(unhashed)))
     static random = () => new TxHash(RandomBytes(TxHash.LENGTH))
     static from64 = (str: string) => new TxHash(InvBuffer.from64(str))
     static from58 = (str: string) => new TxHash(InvBuffer.from58(str))
