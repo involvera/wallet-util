@@ -1,6 +1,6 @@
 import { InvBigInt, ArrayInvBigInt, PubKH as PublicKeyHashed, PubKey as PublicKey, Signature, TxHash } from './'
 import { TIntType } from './bigint'
-import { decodeInt } from './utils'
+import { decodeInt, normalizeToUint8Array, TBufferInitializer } from './utils'
 import { Hash } from '../../ext_src'
 import { ConcatBytes } from '../../ext_src/hash'
 
@@ -27,8 +27,8 @@ export class InvBuffer {
     static fromHex = (str: string) => new InvBuffer(HexToBytes(str))
 
     private buffer: Uint8Array
-    constructor(buffer: Uint8Array | number[]){
-        this.buffer = buffer instanceof Uint8Array ? buffer : new Uint8Array(buffer)
+    constructor(buffer: TBufferInitializer){
+        this.buffer = normalizeToUint8Array(buffer)
 
     }
 
@@ -37,7 +37,7 @@ export class InvBuffer {
         
         const string = () => {
             return {
-                raw: () => BytesToUTF8(this.bytes()),
+                raw: (): string => BytesToUTF8(this.bytes()),
                 hex: () => BytesToHex(this.bytes()),
                 base64: () => BytesToBase64(this.bytes()),
                 base58: () => BytesToBase58(this.bytes())
@@ -50,14 +50,13 @@ export class InvBuffer {
         }   
     }
 
-    eq = (buffer: Uint8Array | InvBuffer) => {
-        if (buffer instanceof InvBuffer)
-            return buffer.to().string().raw() === this.to().string().raw()
-        return new InvBuffer(buffer).to().string().raw() === this.to().string().raw()
-    }
-
+    eq = (buffer: TBufferInitializer) => new InvBuffer(normalizeToUint8Array(buffer)).to().string().raw() ===this.to().string().raw()
     length = () => this.bytes().length
     bytes = () => this.buffer
+    hex = this.to().string().hex
+    base64 = this.to().string().base64
+    toString = this.to().string().raw
+    int = this.to().int
 
     format = () => {
         return {

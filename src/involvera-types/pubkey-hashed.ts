@@ -1,6 +1,6 @@
 import { InvBuffer, Address } from './'
 import { ConcatBytes, RandomBytes } from '../../ext_src/hash'
-import { normalizeToUint8Array } from './utils'
+import { normalizeToUint8Array, TBufferInitializer } from './utils'
 
 const VERSION = 0x00
 export default class PublicKeyHashed extends InvBuffer {
@@ -12,11 +12,11 @@ export default class PublicKeyHashed extends InvBuffer {
     static from58 = (str: string) => new PublicKeyHashed(InvBuffer.from58(str))
     static fromHex = (str: string) => new PublicKeyHashed(InvBuffer.fromHex(str))
 
-    static isValid = (pubkh: InvBuffer | Uint8Array) => normalizeToUint8Array(pubkh).length === PublicKeyHashed.LENGTH
+    static isValid = (pubkh: TBufferInitializer) => normalizeToUint8Array(pubkh).length === PublicKeyHashed.LENGTH
 
-    constructor(b: InvBuffer | Uint8Array){
-        super(normalizeToUint8Array(b))
-        if (!PublicKeyHashed.isValid(b)){
+    constructor(b: TBufferInitializer){
+        super(b)
+        if (!PublicKeyHashed.isValid(this.bytes())){
             throw new Error("Invalid public key hashed")
         }
     }

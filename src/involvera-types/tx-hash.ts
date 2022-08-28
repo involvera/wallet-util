@@ -1,6 +1,6 @@
 import { RandomBytes } from '../../ext_src/hash'
 import { InvBuffer } from './'
-import { normalizeToUint8Array } from './utils'
+import { normalizeToUint8Array, TBufferInitializer } from './utils'
 
 export default class TxHash extends InvBuffer {
 
@@ -9,10 +9,10 @@ export default class TxHash extends InvBuffer {
     static from64 = (str: string) => new TxHash(InvBuffer.from64(str))
     static from58 = (str: string) => new TxHash(InvBuffer.from58(str))
     static fromHex = (str: string) => new TxHash(InvBuffer.fromHex(str))
-    static isValid = (txHash: string | InvBuffer | Uint8Array) => normalizeToUint8Array(txHash).length === TxHash.LENGTH
+    static isValid = (txHash: TBufferInitializer) => normalizeToUint8Array(txHash).length === TxHash.LENGTH
 
-    constructor(b: InvBuffer | Uint8Array){
-        super(normalizeToUint8Array(b))
+    constructor(b: TBufferInitializer){
+        super(b)
         if (!TxHash.isValid(b)){
             throw new Error("Invalid transaction hash")
         }

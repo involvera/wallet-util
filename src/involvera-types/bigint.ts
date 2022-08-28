@@ -28,7 +28,8 @@ export class InvBigInt {
 
     big = () => this._v
     number = () => Number(this._v)
-    
+    bytes = (valtype: TIntType) => this.to().bytes(valtype)
+
     eq = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() === this.big()
     gt = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() < this.big()
     gte = (n: number | InvBigInt | BigInt) => this.eq(n) || this.gt(n)
@@ -45,6 +46,10 @@ export class InvBigInt {
             string
         }
     }
+
+    base64 = (valtype: TIntType) => this.to().string(valtype).base64()
+    hex = (valtype: TIntType) => this.to().string(valtype).hex()
+    toString = (valtype: TIntType) => this.to().string(valtype).raw()
 }
 
 export class ArrayInvBigInt extends Array<InvBigInt> {

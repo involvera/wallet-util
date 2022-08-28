@@ -110,12 +110,21 @@ export const decodeInt = (value: Uint8Array, isNegative: boolean): BigInt => {
     return isNegative ? n - MAX : n
 }
 
-export const normalizeToUint8Array = (d: InvBuffer | Uint8Array | string ) => {
+export type TBufferInitializer = InvBuffer | Uint8Array | string | null | undefined | number[]
+export const normalizeToUint8Array = (d: TBufferInitializer ) => {
+    if (d === null || d === undefined)
+        return new Uint8Array([])
     if (d instanceof InvBuffer)
         return d.bytes()
     if (typeof d === 'string')
         return InvBuffer.fromRaw(d).bytes()
+    if (d instanceof Array)
+        return new Uint8Array(d) 
     return d
+}
+
+export const normalizeToString = (d: TBufferInitializer): string =>{
+    return new InvBuffer(normalizeToUint8Array(d)).toString()
 }
 
 export const generateRandomIntRange = (min: number, max: number) => {

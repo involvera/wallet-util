@@ -61,6 +61,17 @@ describe('Testing Types Class', () => {
         expect(InvBuffer.fromHex("abcdef1234").eq(InvBuffer.fromHex("abcdef1234"))).to.eq(true)
         expect(InvBuffer.fromHex("abcdef1234").eq(InvBuffer.fromHex("abcdef"))).to.eq(false)
 
+        expect(new InvBuffer(null).length()).to.eq(0)
+        expect(new InvBuffer(undefined).length()).to.eq(0)
+        expect(new InvBuffer("hello").bytes().toString()).to.eq(new InvBuffer([104,101,108,108,111]).bytes().toString())
+        expect(new InvBuffer("hello").bytes().toString()).to.eq(new Uint8Array([104,101,108,108,111]).toString())
+    })
+
+    it(`Address`, () => {
+        const a = new Address(new InvBuffer("1DHA8m54a1Vi3oR6LkqkkKYRBR9ZhPjZvC"))
+        expect(a.get()).to.eq("1DHA8m54a1Vi3oR6LkqkkKYRBR9ZhPjZvC")
+        const a2 = new Address(new InvBuffer("1DHA8m54a1Vi3oR6LkqkkKYRBR9ZhPjZvC").bytes())
+        expect(a2.get()).to.eq("1DHA8m54a1Vi3oR6LkqkkKYRBR9ZhPjZvC")
     })
 
     it('Mnemonic', () => {

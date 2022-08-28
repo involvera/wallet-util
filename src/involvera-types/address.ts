@@ -1,5 +1,6 @@
 import { InvBuffer, PubKH } from './'
 import { Sha256, ConcatBytes } from "../../ext_src/hash"
+import { normalizeToString, TBufferInitializer } from './utils'
 
 const ADDR_CHECKSUM_LENGTH = 4
 
@@ -12,7 +13,9 @@ export default class Address {
         return doubleSha.slice(0, ADDR_CHECKSUM_LENGTH)
     }
 
-    static isValid = (addr: string) => {
+    static isValid = (addr: TBufferInitializer) => {
+        addr = normalizeToString(addr)
+
         let pubKeyHash = InvBuffer.from58(addr.slice(1, addr.length)).bytes()
         const actualChecksum = pubKeyHash.slice(pubKeyHash.length-ADDR_CHECKSUM_LENGTH, pubKeyHash.length)
         const version = addr.charCodeAt(0) - 48 - 1
@@ -23,11 +26,11 @@ export default class Address {
     }
 
     private _adr: string
-    constructor(address: string){
-        if (!Address.isValid(address)){
+    constructor(address: TBufferInitializer){
+        this._adr = normalizeToString(address)
+        if (!Address.isValid(this._adr)){
             throw new Error("Invalid address")
         }
-        this._adr = address
     }
 
     shorten = () => `${this.get().slice(0, 6)}...${this.get().slice(this.get().length - 6, this.get().length)}` 
