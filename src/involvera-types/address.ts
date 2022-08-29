@@ -41,4 +41,6 @@ export default class Address {
         const pkh = InvBuffer.from58(address.slice(1, address.length)).bytes()
         return new PubKH(pkh.slice(0, pkh.length - ADDR_CHECKSUM_LENGTH))
     }
+
+    eq = (a: Address) => this.get() === a.get()
 }

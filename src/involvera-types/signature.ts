@@ -39,7 +39,7 @@ export default class Signature extends InvBuffer {
         if (isPlainSig(signature))
             this._pubk = PubKey.fromHex((signature as IPlainSig).public_key)
         if (!Signature.isValid(this.bytes()))
-            throw new Error("Signature")
+            throw new Error("wrong Signature")
     }
 
     private throwErrorIfNotPlain = () => {

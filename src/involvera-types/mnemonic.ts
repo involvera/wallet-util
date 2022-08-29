@@ -15,6 +15,7 @@ export default class Mnemonic {
         this._mnemonic = mnemonic
     }
 
+    buffer = () => InvBuffer.fromRaw(this.get())
     get = () => this._mnemonic
     private seed = () => new InvBuffer(new Uint8Array(BIP39.mnemonicToSeedSync(this.get())))
     private master = () => BIP32.fromMasterSeed(this.seed().bytes())
