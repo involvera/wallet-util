@@ -33,6 +33,7 @@ export class InvBuffer {
     }
 
     to = () =>  {
+        const big = () => new InvBigInt(BigInt(`0x` + this.hex()))
         const int = (isNegative: boolean | void) => new InvBigInt(decodeInt(this.bytes(), !!isNegative))
         
         const string = () => {
@@ -46,6 +47,7 @@ export class InvBuffer {
 
         return {
             int, 
+            big,
             string,
         }   
     }
@@ -57,6 +59,7 @@ export class InvBuffer {
     base64 = this.to().string().base64
     toString = this.to().string().raw
     int = this.to().int
+    big = this.to().big
 
     format = () => {
         return {

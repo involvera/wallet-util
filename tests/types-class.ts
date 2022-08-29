@@ -7,10 +7,12 @@ import {
     TxHash,
     PrivKey,
     InvBuffer,
+    InvBigInt,
 } from '../src/involvera-types/index'
 
 import { expect } from 'chai'
 import { Sha256 } from '../ext_src/hash'
+import { SECP256K1 } from '../ext_src'
 
 const DATA_TO_SIGN = Sha256('hello')
 const WRONG_DATA_TO_SIGN = Sha256('hello2')
@@ -146,5 +148,4 @@ describe('Testing Types Class', () => {
         expect(() => TxHash.isValid(TxHash.random().bytes()))
         expect(() => PrivKey.random().sign('hello'))
     })
-
 })
