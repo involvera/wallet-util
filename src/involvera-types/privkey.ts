@@ -1,7 +1,6 @@
 import { BIP32, SECP256K1 } from '../../ext_src'
 import { RandomBytes } from '../../ext_src/hash'
 import {InvBuffer, PubKey, Signature} from './'
-import { normalizeToUint8Array } from './utils'
 
 export default class PrivateKey {
 
@@ -16,7 +15,7 @@ export default class PrivateKey {
         this._key = key
     }
 
-    get = () => this._key
+    private get = () => this._key
 
     bytes = () => new InvBuffer(this.get().privateKey as Uint8Array)
     publicKey = () => new PubKey(this.get().publicKey as Uint8Array)

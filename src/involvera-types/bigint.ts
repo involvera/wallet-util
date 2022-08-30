@@ -35,6 +35,26 @@ export class InvBigInt {
     gte = (n: number | InvBigInt | BigInt) => this.eq(n) || this.gt(n)
     lw = (n: number | InvBigInt | BigInt) => InvBigInt.normalize(n).big() > this.big()
     lwe = (n: number | InvBigInt | BigInt) =>  this.eq(n) || this.lw(n)
+    add = (n: number | InvBigInt | BigInt) => {
+        this._v = this._v.valueOf() + InvBigInt.normalize(n).big().valueOf()
+        return this
+    }
+    sub = (n: number | InvBigInt | BigInt) => {
+        this._v = this._v.valueOf() - InvBigInt.normalize(n).big().valueOf()
+        return this
+    }
+    mod = (n: number | InvBigInt | BigInt) => {
+        this._v = this._v.valueOf() % InvBigInt.normalize(n).big().valueOf()
+        return this
+    }
+    div = (n: number | InvBigInt | BigInt) => {
+        this._v = this._v.valueOf() / InvBigInt.normalize(n).big().valueOf()
+        return this
+    }
+    mul = (n: number | InvBigInt | BigInt) => {
+        this._v = this._v.valueOf() * InvBigInt.normalize(n).big().valueOf()
+        return this
+    }
 
     to = () => {
         const bytes = (valtype: TIntType) => new InvBuffer(intToByteArray(this._v, toStrictIntType(valtype), isUnsigned(valtype)))
