@@ -963,8 +963,7 @@ describe('Testing int encoding/decoding', () => {
         expect(() => new InvBigInt(MIN_INT_64).to().bytes('uint64').toString()).to.throw(Error)
     })
 
-    it('Calculate', () => {
-
+    it('Comparison', () => {
         expect(new InvBigInt(400n).eq(400)).to.eq(true)
         expect(new InvBigInt(400n).eq(400n)).to.eq(true)
         expect(new InvBigInt(400n).eq(new InvBigInt(400))).to.eq(true)
@@ -985,7 +984,20 @@ describe('Testing int encoding/decoding', () => {
         expect(new InvBigInt(401n).lwe(402)).to.eq(true)
         expect(new InvBigInt(401n).lwe(401)).to.eq(true)
         expect(new InvBigInt(401n).lwe(400)).to.eq(false)
+    })
 
+    it('Calculate', () => {
+        const b = new InvBigInt(1000n)
+        expect(b.add(10).big()).to.eq(1010n)
+        expect(b.add(100).big()).to.eq(1100n)
+        expect(b.sub(100).big()).to.eq(900n)
+        expect(b.sub(10).big()).to.eq(990n)
+        expect(b.mod(33).big()).to.eq(10n)
+        expect(b.mod(300).big()).to.eq(100n)
+        expect(b.div(15).big()).to.eq(66n)
+        expect(b.div(200).big()).to.eq(5n)
+        expect(b.mul(15).big()).to.eq(15_000n)
+        expect(b.mul(200).big()).to.eq(200_000n)
     })
     
 
