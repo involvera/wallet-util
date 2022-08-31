@@ -998,7 +998,35 @@ describe('Testing int encoding/decoding', () => {
         expect(b.div(200).big()).to.eq(5n)
         expect(b.mul(15).big()).to.eq(15_000n)
         expect(b.mul(200).big()).to.eq(200_000n)
+        expect(b.addEq(100).big()).to.eq(1100n)
+        expect(b.subEq(100).big()).to.eq(1000n)
+        expect(b.divEq(10).big()).to.eq(100n)
+        expect(b.mulEq(10).big()).to.eq(1000n)
+
+        //float
+        expect(b.mulDecimals(0.7)).to.eq('700')
+        expect(b.mulDecimals(0.7490245)).to.eq('749.0245')
+        expect(new InvBigInt(b.mulDecimals(0.7490245)).big()).to.eq(749n)
+        expect(b.divDecimals(0.5)).to.eq('2000')
+        expect(b.divDecimals(3.5)).to.eq('285.714285714285714286')
+        expect(b.addDecimals(50)).to.eq('1050')
+        expect(b.addDecimals(50.51)).to.eq('1050.51')
+        expect(b.subDecimals(30.00)).to.eq('970')
+        expect(b.subDecimals(30.91)).to.eq('969.09')
     })
+
+    it('Instance', () => {
+        expect(InvBigInt.ceil('543.324').big()).to.eq(544n)
+        expect(InvBigInt.ceil(543.432).big()).to.eq(544n)
+        expect(InvBigInt.ceil('543.000').big()).to.eq(543n)
+        expect(InvBigInt.ceil(543.000).big()).to.eq(543n)
+        expect(new InvBigInt("0x00324200000000000001").big()).to.eq(927093004891980824577n)
+
+
+    })
+
+
+
     
 
 

@@ -1,4 +1,4 @@
-import { InvBuffer } from "./"
+import { InvBuffer, InvBigInt } from "./"
 
 export const MAX_UINT_8 = BigInt(256)
 export const MAX_UINT_16 = BigInt(65536)
@@ -122,6 +122,16 @@ export const normalizeToUint8Array = (d: TBufferInitializer ) => {
         return new Uint8Array(d) 
     return d
 }
+
+export const normalizeNumberToString = (n: string | BigInt | number | InvBigInt): string => {
+    if (typeof n === 'number')
+        return n.toString()
+    if (n instanceof BigInt)
+        return n.toString()
+    if (n instanceof InvBigInt)
+        return n.big().toString()
+    return n
+}  
 
 export const normalizeToString = (d: TBufferInitializer): string =>{
     return new InvBuffer(normalizeToUint8Array(d)).toString()
