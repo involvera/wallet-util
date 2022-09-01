@@ -4,7 +4,7 @@ import { normalizeToUint8Array, TBufferInitializer } from './utils'
 
 export default class TxHash extends InvBuffer {
 
-    static LENGTH = 64
+    static LENGTH = 32
     static fromUnHashed = (unhashed: TBufferInitializer) => new TxHash(Sha256(normalizeToUint8Array(unhashed)))
     static random = () => new TxHash(RandomBytes(TxHash.LENGTH))
     static from64 = (str: string) => new TxHash(InvBuffer.from64(str))
