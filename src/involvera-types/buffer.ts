@@ -31,7 +31,8 @@ export class InvBuffer {
         this.buffer = normalizeToUint8Array(buffer)
 
     }
-
+    
+    copy = () => new InvBuffer(this)
     to = () =>  {
         const big = () => new InvBigInt(BigInt(`0x` + this.hex()))
         const int = (isNegative: boolean | void) => new InvBigInt(decodeInt(this.bytes(), !!isNegative))

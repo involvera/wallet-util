@@ -42,6 +42,12 @@ export default class Signature extends InvBuffer {
             throw new Error("wrong Signature")
     }
 
+    copy = () => {
+        if (!this._pubk)
+            return new Signature(this.bytes())
+        return new Signature(this.get().plain())
+    }
+
     private throwErrorIfNotPlain = () => {
         if (!this._pubk){
             throw new Error("You can't verify/access an object as signature if the Signature Class has been instance with a uint8array as signature")

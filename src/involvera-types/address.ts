@@ -35,6 +35,7 @@ export default class Address {
 
     shorten = () => `${this.get().slice(0, 6)}...${this.get().slice(this.get().length - 6, this.get().length)}` 
 
+    copy = () => new Address(this.get())
     get = () => this._adr
     toPKH = () => {
         const address = this.get()

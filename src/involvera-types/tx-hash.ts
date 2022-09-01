@@ -18,4 +18,6 @@ export default class TxHash extends InvBuffer {
             throw new Error("Invalid transaction hash")
         }
     }
+
+    copy = () => new TxHash(this.bytes())
 }

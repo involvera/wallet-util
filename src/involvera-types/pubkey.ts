@@ -19,9 +19,6 @@ export default class PublicKey extends InvBuffer {
         }
     }
 
-    po = () => {
-        return 4
-    }
-
+    copy = () => new PublicKey(this.bytes())
     hash = () => new PubKH(Ripemd160(Sha256(this.bytes())))
 }

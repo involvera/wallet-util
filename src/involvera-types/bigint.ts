@@ -52,6 +52,7 @@ export class InvBigInt {
             this._v = i        
     }
 
+    copy = () => new InvBigInt(this)
     big = () => this._v
     number = () => Number(this._v)
     bytes = (valtype: TIntType) => this.to().bytes(valtype)

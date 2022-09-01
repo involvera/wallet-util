@@ -16,6 +16,7 @@ export default class PrivateKey {
     }
 
     private get = () => this._key
+    copy = () => new PrivateKey(this.get())
 
     bytes = () => new InvBuffer(this.get().privateKey as Uint8Array)
     publicKey = () => new PubKey(this.get().publicKey as Uint8Array)

@@ -21,10 +21,7 @@ export default class PublicKeyHashed extends InvBuffer {
         }
     }
 
-    t = (b: InvBuffer | Uint8Array) => {
-        return new InvBuffer(normalizeToUint8Array(b))
-    }
-
+    copy = () => new PublicKeyHashed(this.bytes())
     toAddress = (): Address => {
         const pubKeyHash = this.bytes().slice()
         const versionedPayload = ConcatBytes(new Uint8Array([VERSION]), pubKeyHash)
