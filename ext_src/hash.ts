@@ -39,7 +39,7 @@ export const HexToBytes = hexToBytes
 
 export const UTF8ToBytes = toBytes
 declare const TextDecoder: any;
-export const BytesToUTF8 = (bytes: string) => new TextDecoder().decode(bytes);
+export const BytesToUTF8 = (bytes: Uint8Array) => new TextDecoder().decode(bytes);
 
 export const ConcatBytes = concatBytes
 export const CastToUint8Array = u8

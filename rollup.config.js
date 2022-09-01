@@ -25,9 +25,8 @@ const config = {
             tsconfigOverride: { compilerOptions: { module: 'ES2020' } },
         }),
         commonjs(),
+        uglify()
     ]
 }
-
-config.plugins.push(uglify());
 
 export default config
